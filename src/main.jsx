@@ -9,6 +9,9 @@ import AdminLayout from "./layout/AdminLayout.jsx";
 import AdminLeadTable from "./components/admin/AdminLeadTable.jsx";
 import AdminProfile from "./components/admin/AdminProfile.jsx";
 import AdminSettings from "./components/admin/AdminSettings.jsx";
+import UserLayout from "./layout/UserLayout.jsx";
+import UserLeadsTable from "./components/user/UserLeadsTable.jsx";
+import AdminUserTable from "./components/admin/AdminUserTable.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,13 +22,14 @@ const router = createBrowserRouter([
     path: "/admin-login",
     element: <AdminLogin />,
   },
+  // admin routes
   {
     path: "/admin",
     element: <AdminLayout />,
     children: [
       {
         path: "dashboard",
-        element: <AdminLeadTable />,
+        element: <AdminUserTable />,
       },
       {
         path: "profile",
@@ -34,6 +38,17 @@ const router = createBrowserRouter([
       {
         path: "settings",
         element: <AdminSettings />,
+      },
+    ],
+  },
+  //user routes
+  {
+    path: "/user",
+    element: <UserLayout />,
+    children: [
+      {
+        path: "dashboard",
+        element: <UserLeadsTable />,
       },
     ],
   },
