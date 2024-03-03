@@ -1,6 +1,31 @@
-import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import BASE_URL from "../constant";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${BASE_URL}/admin/login`, {
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", response.data.data.token);
+      navigate("/admin/dashboard");
+    } catch (error) {
+      setErrorMessage(error.response.data.message);
+      console.log(error);
+    }
+  };
+
   return (
     <div className="h-screen flex justify-center items-center ">
       {/* <!-- Sign In Form --> */}
@@ -12,7 +37,7 @@ const AdminLogin = () => {
               Sign In Form
             </h3>
           </div>
-          <form action="#">
+          <form onSubmit={handleFormSubmit}>
             <div className="p-6.5">
               <div className="mb-4.5">
                 <label className="mb-2.5 block text-black dark:text-white">
@@ -21,6 +46,7 @@ const AdminLogin = () => {
                 <input
                   type="email"
                   placeholder="Enter your email address"
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
@@ -32,9 +58,15 @@ const AdminLogin = () => {
                 <input
                   type="password"
                   placeholder="Enter password"
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
+              {!errorMessage ? (
+                <div></div>
+              ) : (
+                <div className="text-sm text-danger pb-2">{errorMessage}</div>
+              )}
 
               <div className="mt-5 mb-5.5 flex items-center justify-between">
                 <a href="#" className="text-sm text-primary">
@@ -42,11 +74,12 @@ const AdminLogin = () => {
                 </a>
               </div>
 
-              <NavLink to="/admin-dashboard">
-                <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
-                  Sign In
-                </button>
-              </NavLink>
+              <button
+                className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
+                type="submit"
+              >
+                Sign In
+              </button>
             </div>
           </form>
         </div>
