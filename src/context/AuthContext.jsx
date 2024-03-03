@@ -1,12 +1,15 @@
 import { createContext, useContext, useState } from "react";
+import useColorMode from "../hooks/useColorMode";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
+  const [colorMode, setColorMode] = useColorMode();
 
   const logout = () => {
     localStorage.removeItem("token");
+    setColorMode("light");
     setUser(null);
   };
 

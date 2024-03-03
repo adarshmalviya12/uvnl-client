@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { IoMdPerson } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
+  const navigate = useNavigate();
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
@@ -140,7 +142,14 @@ const DropdownUser = () => {
             </Link>
           </li>
         </ul>
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button
+          onClick={() => {
+            logout();
+
+            navigate("/admin-login");
+          }}
+          className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+        >
           <svg
             className="fill-current"
             width="22"

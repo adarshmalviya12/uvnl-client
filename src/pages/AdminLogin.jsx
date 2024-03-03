@@ -27,7 +27,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center ">
+    <div className="h-screen flex justify-center items-center bg-gray ">
       {/* <!-- Sign In Form --> */}
       <div className="flex-col ">
         <h1 className="text-title-xl">Welcome Admin</h1>
@@ -65,7 +65,9 @@ const AdminLogin = () => {
               {!errorMessage ? (
                 <div></div>
               ) : (
-                <div className="text-sm text-danger pb-2">{errorMessage}</div>
+                <div className="text-sm text-danger pb-2 pt-2">
+                  {errorMessage}
+                </div>
               )}
 
               <div className="mt-5 mb-5.5 flex items-center justify-between">
