@@ -13,6 +13,7 @@ import UserLeadsTable from "./components/user/UserLeadsTable.jsx";
 import AdminUserTable from "./components/admin/AdminUserTable.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { UsersProvider } from "./context/UsersContext.jsx";
+import { LeadProvider } from "./context/LeadContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
       <UsersProvider>
-        <RouterProvider router={router} />
+        <LeadProvider>
+          <RouterProvider router={router} />
+        </LeadProvider>
       </UsersProvider>
     </AuthProvider>
   </React.StrictMode>

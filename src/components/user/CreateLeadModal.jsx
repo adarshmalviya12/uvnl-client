@@ -1,7 +1,66 @@
 import { useState } from "react";
+import { useLeads } from "../../context/LeadContext";
+import axios from "axios";
+import BASE_URL from "../../constant";
 
 const CreateLeadModel = () => {
   const [showModal, setShowModal] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [lead, setLead] = useState();
+
+  const [firstName, setFirstName] = useState("");
+  const [middleName, setMiddleName] = useState("");
+  const [lastName, setLastName] = useState("");
+  // const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
+  // const [leadSource, setLeadSource] = useState("");
+  // const [dob, setDob] = useState("");
+  // const [street, setStreet] = useState("");
+  // const [city, setCity] = useState("");
+  // const [state, setState] = useState("");
+  // const [pinCode, setPinCode] = useState("");
+  // const [country, setCountry] = useState("");
+  // const [occupation, setOccupation] = useState("");
+
+  const { setLeads } = useLeads();
+  const token = localStorage.getItem("token");
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const newLead = {
+        email,
+        firstName,
+        lastName,
+        middleName,
+        number,
+      };
+
+      const response = await axios.post(`${BASE_URL}/user/lead`, newLead, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setLeads((prevLeads) => [...prevLeads, newLead]);
+      setLead(response.data.data);
+      //
+      setFirstName("");
+      setEmail("");
+      setMiddleName("");
+      setLastName("");
+      setNumber("");
+      //'s
+      setShowModal(false);
+    } catch (error) {
+      console.error("Error creating lead:", error);
+      setErrorMessage(error.response?.data?.message || "An error occurred");
+      alert(errorMessage);
+    }
+  };
+
   return (
     <>
       <button
@@ -49,7 +108,7 @@ const CreateLeadModel = () => {
                           type="middlename"
                           name="middlename"
                           placeholder="middlename"
-                          onChange={(e) => setEmail(e.target.value)}
+                          onChange={(e) => setMiddleName(e.target.value)}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
@@ -77,7 +136,7 @@ const CreateLeadModel = () => {
                           type="email"
                           name="email"
                           placeholder="email"
-                          onChange={(e) => setFirstName(e.target.value)}
+                          onChange={(e) => setEmail(e.target.value)}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
@@ -90,7 +149,7 @@ const CreateLeadModel = () => {
                           type="number"
                           name="phone no"
                           placeholder="phone no"
-                          onChange={(e) => setLastName(e.target.value)}
+                          onChange={(e) => setNumber(e.target.value)}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
@@ -242,7 +301,7 @@ const CreateLeadModel = () => {
                   <button
                     className="inline-flex items-center justify-center bg-primary py-1 px-2 text-center font-normal  text-white hover:bg-opacity-90 md:px-2 xl:px-4"
                     type="button"
-                    onClick={() => setShowModal(false)}
+                    onClick={handleFormSubmit}
                   >
                     Save
                   </button>
