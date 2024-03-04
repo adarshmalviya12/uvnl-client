@@ -1,6 +1,30 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import BASE_URL from "./constant";
 
 function App() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${BASE_URL}/user/login`, {
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", response.data.data.token);
+      navigate("/user/dashboard");
+    } catch (error) {
+      setErrorMessage(error.response.data.message);
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -148,7 +172,7 @@ function App() {
                 {/* <img className="hidden dark:block" src={Logo} alt="Logo" />
                 <img className="dark:hidden" src={LogoDark} alt="Logo" /> */}
               </Link>
-              <form>
+              <form onSubmit={handleFormSubmit}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Email
@@ -156,7 +180,8 @@ function App() {
                   <div className="relative">
                     <input
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder="Enter your email address"
+                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full rounded-lg border border-stroke bg-transparent py-1.5 px-3 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
 
@@ -182,12 +207,13 @@ function App() {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Re-type Password
+                    Password
                   </label>
                   <div className="relative">
                     <input
                       type="password"
-                      placeholder="6+ Characters, 1 Capital letter"
+                      placeholder="Enter password"
+                      onChange={(e) => setPassword(e.target.value)}
                       className="w-full rounded-lg border border-stroke bg-transparent py-1.5 px-3 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
 
@@ -214,6 +240,14 @@ function App() {
                     </span>
                   </div>
                 </div>
+
+                {!errorMessage ? (
+                  <div></div>
+                ) : (
+                  <div className="text-sm text-danger pb-2 pt-2">
+                    {errorMessage}
+                  </div>
+                )}
 
                 <div className="mb-5">
                   <input
