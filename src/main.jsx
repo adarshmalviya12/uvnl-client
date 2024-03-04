@@ -6,13 +6,13 @@ import "./index.css";
 // import components
 import AdminLogin from "./pages/AdminLogin.jsx";
 import AdminLayout from "./layout/AdminLayout.jsx";
-import AdminLeadTable from "./components/admin/AdminLeadTable.jsx";
 import AdminProfile from "./components/admin/AdminProfile.jsx";
 import AdminSettings from "./components/admin/AdminSettings.jsx";
 import UserLayout from "./layout/UserLayout.jsx";
 import UserLeadsTable from "./components/user/UserLeadsTable.jsx";
 import AdminUserTable from "./components/admin/AdminUserTable.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { UsersProvider } from "./context/UsersContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +57,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <UsersProvider>
+        <RouterProvider router={router} />
+      </UsersProvider>
     </AuthProvider>
   </React.StrictMode>
 );

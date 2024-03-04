@@ -24,7 +24,8 @@ const CreateLeadModel = () => {
                   </h3>
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto">
+                <div className="relative p-6 flex-auto overflow-y-auto max-h-80 md:max-h-90">
+                  {/* Ensure to set max height and overflow for the content */}
                   <form action="" className="font-thin text-sm ">
                     {/* name  */}
                     <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
