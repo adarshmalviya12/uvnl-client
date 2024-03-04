@@ -2,9 +2,12 @@ import CreateLeadModel from "./CreateLeadModal";
 import { FaEdit, FaEye } from "react-icons/fa";
 import DeleteButton from "./DeleteButton";
 import { useLeads } from "../../context/LeadContext";
+import { useNavigate } from "react-router-dom";
 
 const UserLeadsTable = () => {
   const { leads } = useLeads();
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -48,7 +51,11 @@ const UserLeadsTable = () => {
                     </td>
                     <td className="border-b border-[#eee] py-3 px-2 pl-9  dark:border-strokedark xl:pl-11">
                       <div className="flex gap-2 justify-center  ">
-                        <button>{<FaEye />}</button>
+                        <button
+                          onClick={() => navigate(`/user/lead/${lead._id}`)}
+                        >
+                          {<FaEye />}
+                        </button>
                         <button>{<FaEdit />}</button>
                         <DeleteButton onDelete={() => handleDelete(lead._id)} />
                       </div>

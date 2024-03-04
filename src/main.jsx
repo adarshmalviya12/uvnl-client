@@ -14,6 +14,7 @@ import AdminUserTable from "./components/admin/AdminUserTable.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { UsersProvider } from "./context/UsersContext.jsx";
 import { LeadProvider } from "./context/LeadContext.jsx";
+import ViewLead from "./components/user/ViewLead.jsx";
 
 const router = createBrowserRouter([
   {
@@ -52,9 +53,14 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <UserLeadsTable />,
       },
+      {
+        path: "lead/:leadId",
+        element: <ViewLead />,
+      },
     ],
   },
 ]);
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
