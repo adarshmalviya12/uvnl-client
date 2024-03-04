@@ -12,17 +12,17 @@ const CreateLeadModel = () => {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
-  // const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
-  // const [leadSource, setLeadSource] = useState("");
-  // const [dob, setDob] = useState("");
-  // const [street, setStreet] = useState("");
-  // const [city, setCity] = useState("");
-  // const [state, setState] = useState("");
-  // const [pinCode, setPinCode] = useState("");
-  // const [country, setCountry] = useState("");
-  // const [occupation, setOccupation] = useState("");
+  const [leadSource, setLeadSource] = useState("");
+  const [dob, setDob] = useState("");
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [pinCode, setPinCode] = useState("");
+  const [country, setCountry] = useState("");
+  const [occupation, setOccupation] = useState("");
 
   const { setLeads } = useLeads();
   const token = localStorage.getItem("token");
@@ -36,6 +36,13 @@ const CreateLeadModel = () => {
         lastName,
         middleName,
         number,
+        gender,
+        leadSource,
+        street,
+        city,
+        state,
+        pinCode,
+        country,
       };
 
       const response = await axios.post(`${BASE_URL}/user/lead`, newLead, {
@@ -46,7 +53,7 @@ const CreateLeadModel = () => {
 
       setLeads((prevLeads) => [...prevLeads, newLead]);
       setLead(response.data.data);
-      //
+
       setFirstName("");
       setEmail("");
       setMiddleName("");
@@ -160,18 +167,22 @@ const CreateLeadModel = () => {
                         <label className="mb-2.5 block text-black dark:text-white">
                           Gender <span className="text-meta-1">*</span>
                         </label>
-                        <select className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                          <option value="">select</option>
-                          <option value="Government Employee">
-                            Government Employee
+                        <select
+                          value={gender}
+                          onChange={(e) => setGender(e.target.value)}
+                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        >
+                          <option value="" disabled>
+                            select
                           </option>
-                          <option value="Business">Business</option>
-                          <option value="Housewife">Housewife</option>
-                          <option value="Other">Other</option>
+
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="other">Other</option>
                         </select>
                       </div>
 
-                      <div className="w-full xl:w-1/2">
+                      <div className="w-full xl:w-1/3">
                         <label className="mb-2.5 block text-black dark:text-white">
                           Date of Birth <span className="text-meta-1">*</span>
                         </label>
@@ -188,13 +199,19 @@ const CreateLeadModel = () => {
                         <label className="mb-2.5 block text-black dark:text-white">
                           Lead Source <span className="text-meta-1">*</span>
                         </label>
-                        <input
-                          type="text"
-                          name="Lead"
-                          placeholder="lead source"
-                          onChange={(e) => setLastName(e.target.value)}
-                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                        />
+                        <select
+                          value={leadSource}
+                          onChange={(e) => setLeadSource(e.target.value)}
+                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        >
+                          <option value="" disabled>
+                            select
+                          </option>
+
+                          <option value="marketing">marketing</option>
+                          <option value="call">call</option>
+                          <option value="email">email</option>
+                        </select>
                       </div>
                     </div>
                     {/* Address */}
@@ -205,41 +222,38 @@ const CreateLeadModel = () => {
                       <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
                         <div className="w-full xl:w-1/3">
                           <label className="mb-2.5 block text-black dark:text-white">
-                            Gender <span className="text-meta-1">*</span>
-                          </label>
-                          <select className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                            <option value="">select</option>
-                            <option value="Government Employee">
-                              Government Employee
-                            </option>
-                            <option value="Business">Business</option>
-                            <option value="Housewife">Housewife</option>
-                            <option value="Other">Other</option>
-                          </select>
-                        </div>
-
-                        <div className="w-full xl:w-1/2">
-                          <label className="mb-2.5 block text-black dark:text-white">
-                            Date of Birth <span className="text-meta-1">*</span>
+                            Street <span className="text-meta-1">*</span>
                           </label>
                           <input
-                            type="date"
-                            name="dob"
-                            placeholder="date of birth"
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="text"
+                            name="street"
+                            placeholder="street"
+                            onChange={(e) => setStreet(e.target.value)}
                             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
 
                         <div className="w-full xl:w-1/3">
                           <label className="mb-2.5 block text-black dark:text-white">
-                            Lead Source <span className="text-meta-1">*</span>
+                            City <span className="text-meta-1">*</span>
                           </label>
                           <input
                             type="text"
-                            name="lastname"
-                            placeholder="last name"
-                            onChange={(e) => setLastName(e.target.value)}
+                            name="city"
+                            placeholder="city"
+                            onChange={(e) => setCity(e.target.value)}
+                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                          />
+                        </div>
+                        <div className="w-full xl:w-1/3">
+                          <label className="mb-2.5 block text-black dark:text-white">
+                            State <span className="text-meta-1">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="state"
+                            placeholder="state"
+                            onChange={(e) => setState(e.target.value)}
                             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
@@ -247,44 +261,31 @@ const CreateLeadModel = () => {
                       <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
                         <div className="w-full xl:w-1/3">
                           <label className="mb-2.5 block text-black dark:text-white">
-                            Gender <span className="text-meta-1">*</span>
-                          </label>
-                          <select className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                            <option value="">select</option>
-                            <option value="Government Employee">
-                              Government Employee
-                            </option>
-                            <option value="Business">Business</option>
-                            <option value="Housewife">Housewife</option>
-                            <option value="Other">Other</option>
-                          </select>
-                        </div>
-
-                        <div className="w-full xl:w-1/2">
-                          <label className="mb-2.5 block text-black dark:text-white">
-                            Date of Birth <span className="text-meta-1">*</span>
+                            country <span className="text-meta-1">*</span>
                           </label>
                           <input
-                            type="date"
-                            name="dob"
-                            placeholder="date of birth"
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="text"
+                            name="Country"
+                            placeholder="Country"
+                            onChange={(e) => setCountry(e.target.value)}
                             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
 
                         <div className="w-full xl:w-1/3">
                           <label className="mb-2.5 block text-black dark:text-white">
-                            Lead Source <span className="text-meta-1">*</span>
+                            Pincode <span className="text-meta-1">*</span>
                           </label>
                           <input
-                            type="text"
-                            name="lastname"
-                            placeholder="last name"
-                            onChange={(e) => setLastName(e.target.value)}
+                            type="number"
+                            name="Pincode"
+                            placeholder="Pincode"
+                            onChange={(e) => setPinCode(e.target.value)}
                             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
+
+                        <div className="w-full xl:w-1/3"></div>
                       </div>
                     </div>
                   </form>
