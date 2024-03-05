@@ -47,7 +47,17 @@ const ViewLead = () => {
           Mobile Number: {lead.number}
         </p>
         <p className="text-gray-600 dark:text-gray-400 mb-2">
-          Created By: {lead.createdBy}
+          Gender: {lead.gender}
+        </p>
+        <p className="text-gray-600 dark:text-gray-400 mb-2">
+          Lead Source: {lead.leadSource}
+        </p>
+        <p className="text-gray-600 dark:text-gray-400 mb-2">
+          Date of Birth: {lead.dob}
+        </p>
+        <p className="text-gray-600 dark:text-gray-400 mb-2">
+          Occupation: {lead.occupation}
+                  
         </p>
         <p className="text-gray-600 dark:text-gray-400 mb-2">
           Converted: {lead.isConverted ? "Yes" : "No"}

@@ -3,11 +3,30 @@ import { FaEdit, FaEye } from "react-icons/fa";
 import DeleteButton from "./DeleteButton";
 import { useLeads } from "../../context/LeadContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import BASE_URL from "../../constant";
 
 const UserLeadsTable = () => {
-  const { leads } = useLeads();
+  const { leads, setLeads } = useLeads();
 
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${BASE_URL}/user/lead/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setLeads(leads.filter((item) => item._id !== id));
+    } catch (error) {
+      console.error(error.response.data.message);
+    }
+    console.log(id);
+  };
 
   return (
     <>

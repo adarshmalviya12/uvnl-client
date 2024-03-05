@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 
-const DeleteButton = () => {
+const DeleteButton = ({ onDelete }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleDelete = () => {
+    onDelete();
     setShowModal(false);
   };
   return (

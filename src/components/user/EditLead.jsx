@@ -7,32 +7,48 @@ const EditLead = () => {
   const { leadId } = useParams();
   const [lead, setLead] = useState({});
 
-  const [firstName, setFirstName] = useState("");
-  const [middleName, setMiddleName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
-  const [leadSource, setLeadSource] = useState("");
-  const [dob, setDob] = useState("");
-  const [street, setStreet] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [pinCode, setPinCode] = useState("");
-  const [country, setCountry] = useState("");
-  const [occupation, setOccupation] = useState("");
+  const [firstName, setFirstName] = useState(lead?.firstName);
+  const [middleName, setMiddleName] = useState(lead?.middleName);
+  const [lastName, setLastName] = useState(lead?.lastName);
+  const [gender, setGender] = useState(lead?.gender);
+  const [email, setEmail] = useState(lead?.email);
+  const [number, setNumber] = useState(lead?.number);
+  const [leadSource, setLeadSource] = useState(lead?.leadSource);
+  const [dob, setDob] = useState(lead?.dob);
+  const [street, setStreet] = useState(lead?.street);
+  const [city, setCity] = useState(lead?.city);
+  const [state, setState] = useState(lead?.state);
+  const [pinCode, setPinCode] = useState(lead?.pinCode);
+  const [country, setCountry] = useState(lead?.country);
+  const [occupation, setOccupation] = useState(lead?.occupation);
 
   const token = localStorage.getItem("token");
 
   const fetchLead = async () => {
-    const response = await axios.get(`${BASE_URL}/user/lead/${leadId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    setLead(response.data.data.lead);
     try {
+      const response = await axios.get(`${BASE_URL}/user/lead/${leadId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setLead(response.data.data.lead);
+      setFirstName(lead.firstName);
+      setMiddleName(lead.middleName);
+      setLastName(lead.lastName);
+      setGender(lead.gender);
+      setEmail(lead.email);
+      setNumber(lead.number);
+      setLeadSource(lead.leadSource);
+      setDob(lead.dob);
+      setStreet(lead.street);
+      setCity(lead.city);
+      setState(lead.state);
+      setPinCode(lead.pinCode);
+      setCountry(lead.country);
+      setOccupation(lead.occupation);
+
+      console.log(lead);
     } catch (error) {
       console.error(error.response.data.message);
     }
@@ -44,7 +60,6 @@ const EditLead = () => {
   return (
     <div className="relative p-6 flex-auto overflow-y-auto max-h-80 md:max-h-90 lg:max-h-115">
       <form action="" className="font-thin text-sm ">
-        {console.log(lead.firstName)}
         {/* name  */}
         <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
           <div className="w-full xl:w-1/3">
