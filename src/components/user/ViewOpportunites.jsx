@@ -12,7 +12,7 @@ const ViewOpportunites = () => {
   return (
     <>
       <div className="flex justify-between items-center text-title-lg mb-3   ">
-        <h1 className="text-black dark:text-white">Leads Table</h1>
+        <h1 className="text-black dark:text-white">Opportunities</h1>
         <CreateOppotunityModel />
       </div>
       <div className="">
