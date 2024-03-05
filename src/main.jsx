@@ -15,6 +15,8 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { UsersProvider } from "./context/UsersContext.jsx";
 import { LeadProvider } from "./context/LeadContext.jsx";
 import ViewLead from "./components/user/ViewLead.jsx";
+import EditLead from "./components/user/EditLead.jsx";
+import ViewOpportunites from "./components/user/ViewOpportunites.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,8 +56,16 @@ const router = createBrowserRouter([
         element: <UserLeadsTable />,
       },
       {
+        path: "opportunity",
+        element: <ViewOpportunites />,
+      },
+      {
         path: "lead/:leadId",
         element: <ViewLead />,
+      },
+      {
+        path: "lead/edit/:leadId",
+        element: <EditLead />,
       },
     ],
   },

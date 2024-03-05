@@ -32,7 +32,7 @@ const ViewLead = () => {
         className=" bg-white dark:bg-black"
         key={lead._id} // Note: _id not provided in lead data
       >
-        <h2 className="text-title-xl  font-semibold text-black dark:text-white  mb-4">
+        <h2 className="text-title-xl  font-extrabold text-black dark:text-white  mb-4">
           Leads Details : -
         </h2>
         <h2 className="text-xl font-semibold text-black dark:text-white  mb-4">

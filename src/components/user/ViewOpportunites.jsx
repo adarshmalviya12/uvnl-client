@@ -1,10 +1,10 @@
-import CreateLeadModel from "./CreateLeadModal";
 import { FaEdit, FaEye } from "react-icons/fa";
 import DeleteButton from "./DeleteButton";
 import { useLeads } from "../../context/LeadContext";
 import { useNavigate } from "react-router-dom";
+import CreateOppotunityModel from "./CreateOppotunityModel";
 
-const UserLeadsTable = () => {
+const ViewOpportunites = () => {
   const { leads } = useLeads();
 
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const UserLeadsTable = () => {
     <>
       <div className="flex justify-between items-center text-title-lg mb-3   ">
         <h1 className="text-black dark:text-white">Leads Table</h1>
-        <CreateLeadModel />
+        <CreateOppotunityModel />
       </div>
       <div className="">
         <div className="max-w-full overflow-x-auto">
@@ -92,4 +92,4 @@ const UserLeadsTable = () => {
     </>
   );
 };
-export default UserLeadsTable;
+export default ViewOpportunites;
