@@ -25,7 +25,6 @@ const UserLeadsTable = () => {
     } catch (error) {
       console.error(error.response.data.message);
     }
-    console.log(id);
   };
 
   return (
