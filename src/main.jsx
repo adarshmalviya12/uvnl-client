@@ -56,16 +56,20 @@ const router = createBrowserRouter([
         element: <UserLeadsTable />,
       },
       {
-        path: "opportunity",
-        element: <ViewOpportunites />,
-      },
-      {
         path: "lead/:leadId",
         element: <ViewLead />,
       },
       {
         path: "lead/edit/:leadId",
         element: <EditLead />,
+      },
+      {
+        path: "opportunity",
+        element: <ViewOpportunites />,
+      },
+      {
+        path: "opportunity",
+        element: <ViewOpportunites />,
       },
     ],
   },

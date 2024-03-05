@@ -38,11 +38,13 @@ const CreateLeadModel = () => {
         number,
         gender,
         leadSource,
+        dob,
         street,
         city,
         state,
         pinCode,
         country,
+        occupation,
       };
 
       const response = await axios.post(`${BASE_URL}/user/lead`, newLead, {
@@ -75,7 +77,7 @@ const CreateLeadModel = () => {
         type="button"
         onClick={() => setShowModal(true)}
       >
-        create lead
+        Create lead
       </button>
       {showModal ? (
         <>
@@ -135,7 +137,7 @@ const CreateLeadModel = () => {
                     </div>
                     {/* email and phone no  */}
                     <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
-                      <div className="w-full xl:w-1/2">
+                      <div className="w-full xl:w-1/3">
                         <label className="mb-2.5 block text-black dark:text-white">
                           Email <span className="text-meta-1">*</span>
                         </label>
@@ -148,7 +150,7 @@ const CreateLeadModel = () => {
                         />
                       </div>
 
-                      <div className="w-full xl:w-1/2">
+                      <div className="w-full xl:w-1/3">
                         <label className="mb-2.5 block text-black dark:text-white">
                           Phone No<span className="text-meta-1">*</span>
                         </label>
@@ -160,9 +162,7 @@ const CreateLeadModel = () => {
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
-                    </div>
-                    {/* gender dob and lead status */}
-                    <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
+
                       <div className="w-full xl:w-1/3">
                         <label className="mb-2.5 block text-black dark:text-white">
                           Gender <span className="text-meta-1">*</span>
@@ -181,6 +181,21 @@ const CreateLeadModel = () => {
                           <option value="other">Other</option>
                         </select>
                       </div>
+                    </div>
+                    {/* gender dob and lead status */}
+                    <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
+                      <div className="w-full xl:w-1/3">
+                        <label className="mb-2.5 block text-black dark:text-white">
+                          Occupation <span className="text-meta-1">*</span>
+                        </label>
+                        <input
+                          type="Occupation"
+                          name="Occupation"
+                          placeholder="Occupation"
+                          onChange={(e) => setOccupation(e.target.value)}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
 
                       <div className="w-full xl:w-1/3">
                         <label className="mb-2.5 block text-black dark:text-white">
@@ -190,7 +205,7 @@ const CreateLeadModel = () => {
                           type="date"
                           name="dob"
                           placeholder="date of birth"
-                          onChange={(e) => setEmail(e.target.value)}
+                          onChange={(e) => setDob(e.target.value)}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
