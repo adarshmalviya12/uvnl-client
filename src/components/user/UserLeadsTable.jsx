@@ -5,9 +5,12 @@ import { useLeads } from "../../context/LeadContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BASE_URL from "../../constant";
+import { useState } from "react";
 
 const UserLeadsTable = () => {
   const { leads, setLeads } = useLeads();
+  const [currentPage, setCurrentPage] = useState(1);
+  const leadsPerPage = 5; // Number of leads to display per page
 
   const navigate = useNavigate();
 
@@ -26,6 +29,13 @@ const UserLeadsTable = () => {
       console.error(error.response.data.message);
     }
   };
+
+  // Logic to paginate leads
+  const indexOfLastLead = currentPage * leadsPerPage;
+  const indexOfFirstLead = indexOfLastLead - leadsPerPage;
+  const currentLeads = leads.slice(indexOfFirstLead, indexOfLastLead);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -54,58 +64,72 @@ const UserLeadsTable = () => {
               </tr>
             </thead>
             <tbody>
-              {leads.length !== 0 ? (
-                leads?.map((lead) => (
-                  <tr className="  dark:bg-meta-4" key={lead._id}>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                      {lead.firstName} {lead.lastName}
+              {currentLeads.length !== 0 ? (
+                currentLeads?.map((lead) => (
+                  <tr className="dark:bg-meta-4" key={lead?._id}>
+                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                      {lead?.firstName} {lead?.lastName}
                     </td>
-
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                      {lead.number}
+                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                      {lead?.number}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                      {lead.email}
+                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                      {lead?.email}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9  dark:border-strokedark xl:pl-11">
-                      <div className="flex gap-2 justify-center  ">
+                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                      <div className="flex gap-2 justify-center">
                         <button
-                          onClick={() => navigate(`/user/lead/${lead._id}`)}
+                          onClick={() => navigate(`/user/lead/${lead?._id}`)}
                         >
-                          {<FaEye />}
+                          <FaEye />
                         </button>
                         <button
                           onClick={() =>
-                            navigate(`/user/lead/edit/${lead._id}`)
+                            navigate(`/user/lead/edit/${lead?._id}`)
                           }
                         >
-                          {<FaEdit />}
+                          <FaEdit />
                         </button>
-                        <DeleteButton onDelete={() => handleDelete(lead._id)} />
+                        <DeleteButton
+                          onDelete={() => handleDelete(lead?._id)}
+                        />
                       </div>
                     </td>
                   </tr>
                 ))
               ) : (
-                <tr className="  dark:bg-meta-4">
-                  <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                    empty
-                  </td>
-
-                  <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                    empty
-                  </td>
-                  <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                    empty
-                  </td>
-                  <td className="border-b border-[#eee] py-3 px-2 pl-9  dark:border-strokedark xl:pl-11">
-                    empty
+                <tr className="dark:bg-meta-4">
+                  <td
+                    className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11"
+                    colSpan="4"
+                  >
+                    No leads to display
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
+        <ul className="flex justify-center mt-4">
+          {Array.from(
+            { length: Math.ceil(leads.length / leadsPerPage) },
+            (_, i) => (
+              <li key={i} className="mx-1">
+                <button
+                  onClick={() => paginate(i + 1)}
+                  className="bg-bodydark hover:bg-bodydark text-white font-bold py-2 px-4 rounded"
+                  style={{
+                    backgroundColor:
+                      currentPage === i + 1 ? "#4f46e5" : "#6b63ff",
+                    borderColor: currentPage === i + 1 ? "#4f46e5" : "#6b63ff",
+                  }}
+                >
+                  {i + 1}
+                </button>
+              </li>
+            )
+          )}
+        </ul>
       </div>
     </>
   );

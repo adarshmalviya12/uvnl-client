@@ -9,20 +9,27 @@ const CreateLeadModel = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [lead, setLead] = useState();
 
-  const [firstName, setFirstName] = useState("");
-  const [middleName, setMiddleName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
-  const [leadSource, setLeadSource] = useState("");
-  const [dob, setDob] = useState("");
-  const [street, setStreet] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [pinCode, setPinCode] = useState("");
-  const [country, setCountry] = useState("");
-  const [occupation, setOccupation] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    gender: "",
+    email: "",
+    number: "",
+    leadSource: "",
+    dob: "",
+    street: "",
+    city: "",
+    state: "",
+    pinCode: "",
+    country: "",
+    occupation: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const { setLeads } = useLeads();
   const token = localStorage.getItem("token");
@@ -30,43 +37,16 @@ const CreateLeadModel = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newLead = {
-        email,
-        firstName,
-        lastName,
-        middleName,
-        number,
-        gender,
-        leadSource,
-        dob,
-        street,
-        city,
-        state,
-        pinCode,
-        country,
-        occupation,
-      };
-
-      const response = await axios.post(`${BASE_URL}/user/lead`, newLead, {
+      const response = await axios.post(`${BASE_URL}/user/lead`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      setLeads((prevLeads) => [...prevLeads, newLead]);
-      setLead(response.data.data);
-
-      setFirstName("");
-      setEmail("");
-      setMiddleName("");
-      setLastName("");
-      setNumber("");
-      //'s
+      setLeads((prevLeads) => [...prevLeads, response.data.data.lead]);
       setShowModal(false);
     } catch (error) {
       console.error("Error creating lead:", error);
       setErrorMessage(error.response?.data?.message || "An error occurred");
-      alert(errorMessage);
     }
   };
 
@@ -102,9 +82,10 @@ const CreateLeadModel = () => {
                         </label>
                         <input
                           type="text"
-                          name="firstname"
+                          name="firstName"
                           placeholder="first name"
-                          onChange={(e) => setFirstName(e.target.value)}
+                          value={formData.firstName}
+                          onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
@@ -114,10 +95,11 @@ const CreateLeadModel = () => {
                           Middlename <span className="text-meta-1">*</span>
                         </label>
                         <input
-                          type="middlename"
-                          name="middlename"
+                          type="text"
+                          name="middleName"
                           placeholder="middlename"
-                          onChange={(e) => setMiddleName(e.target.value)}
+                          value={formData.middleName}
+                          onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
@@ -128,9 +110,10 @@ const CreateLeadModel = () => {
                         </label>
                         <input
                           type="text"
-                          name="lastname"
+                          name="lastName"
                           placeholder="last name"
-                          onChange={(e) => setLastName(e.target.value)}
+                          value={formData.lastName}
+                          onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
@@ -145,7 +128,8 @@ const CreateLeadModel = () => {
                           type="email"
                           name="email"
                           placeholder="email"
-                          onChange={(e) => setEmail(e.target.value)}
+                          value={formData.email}
+                          onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
@@ -155,10 +139,11 @@ const CreateLeadModel = () => {
                           Phone No<span className="text-meta-1">*</span>
                         </label>
                         <input
-                          type="number"
-                          name="phone no"
+                          type="tel"
+                          name="number"
                           placeholder="phone no"
-                          onChange={(e) => setNumber(e.target.value)}
+                          value={formData.number}
+                          onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
@@ -168,14 +153,14 @@ const CreateLeadModel = () => {
                           Gender <span className="text-meta-1">*</span>
                         </label>
                         <select
-                          value={gender}
-                          onChange={(e) => setGender(e.target.value)}
+                          name="gender"
+                          value={formData.gender}
+                          onChange={handleInputChange}
                           className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         >
                           <option value="" disabled>
                             select
                           </option>
-
                           <option value="male">Male</option>
                           <option value="female">Female</option>
                           <option value="other">Other</option>
@@ -189,10 +174,11 @@ const CreateLeadModel = () => {
                           Occupation <span className="text-meta-1">*</span>
                         </label>
                         <input
-                          type="Occupation"
-                          name="Occupation"
+                          type="text"
+                          name="occupation"
                           placeholder="Occupation"
-                          onChange={(e) => setOccupation(e.target.value)}
+                          value={formData.occupation}
+                          onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
@@ -205,7 +191,8 @@ const CreateLeadModel = () => {
                           type="date"
                           name="dob"
                           placeholder="date of birth"
-                          onChange={(e) => setDob(e.target.value)}
+                          value={formData.dob}
+                          onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
@@ -215,14 +202,14 @@ const CreateLeadModel = () => {
                           Lead Source <span className="text-meta-1">*</span>
                         </label>
                         <select
-                          value={leadSource}
-                          onChange={(e) => setLeadSource(e.target.value)}
+                          name="leadSource"
+                          value={formData.leadSource}
+                          onChange={handleInputChange}
                           className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         >
                           <option value="" disabled>
                             select
                           </option>
-
                           <option value="marketing">marketing</option>
                           <option value="call">call</option>
                           <option value="email">email</option>
@@ -243,7 +230,8 @@ const CreateLeadModel = () => {
                             type="text"
                             name="street"
                             placeholder="street"
-                            onChange={(e) => setStreet(e.target.value)}
+                            value={formData.street}
+                            onChange={handleInputChange}
                             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
@@ -256,7 +244,8 @@ const CreateLeadModel = () => {
                             type="text"
                             name="city"
                             placeholder="city"
-                            onChange={(e) => setCity(e.target.value)}
+                            value={formData.city}
+                            onChange={handleInputChange}
                             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
@@ -268,7 +257,8 @@ const CreateLeadModel = () => {
                             type="text"
                             name="state"
                             placeholder="state"
-                            onChange={(e) => setState(e.target.value)}
+                            value={formData.state}
+                            onChange={handleInputChange}
                             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
@@ -280,9 +270,10 @@ const CreateLeadModel = () => {
                           </label>
                           <input
                             type="text"
-                            name="Country"
+                            name="country"
                             placeholder="Country"
-                            onChange={(e) => setCountry(e.target.value)}
+                            value={formData.country}
+                            onChange={handleInputChange}
                             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
@@ -293,14 +284,13 @@ const CreateLeadModel = () => {
                           </label>
                           <input
                             type="number"
-                            name="Pincode"
+                            name="pinCode"
                             placeholder="Pincode"
-                            onChange={(e) => setPinCode(e.target.value)}
+                            value={formData.pinCode}
+                            onChange={handleInputChange}
                             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
-
-                        <div className="w-full xl:w-1/3"></div>
                       </div>
                     </div>
                   </form>
