@@ -4,55 +4,84 @@ import BASE_URL from "../../constant";
 import { useEffect, useState } from "react";
 
 const ViewOpportunity = () => {
-  const { leadId } = useParams();
-  const [lead, setLead] = useState({});
-
-  const token = localStorage.getItem("token");
-
-  const fetchLead = async () => {
-    const response = await axios.get(`${BASE_URL}/user/lead/${leadId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    setLead(response.data.data.lead);
-    try {
-    } catch (error) {
-      console.error(error.response.data.message);
-    }
-  };
+  const { opportunityId } = useParams();
+  const [opportunity, setOpportunity] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchLead();
-  }, []);
+    const fetchOpportunity = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `${BASE_URL}/user/opportunity/${opportunityId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setOpportunity(response.data.data.opportunity);
+        setLoading(false);
+      } catch (error) {
+        setError(error.response.data.message);
+        setLoading(false);
+      }
+    };
+
+    fetchOpportunity();
+  }, [opportunityId]);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  p-10  text-black dark:text-white border-b border-stroke px-5 py-2 dark:border-strokedark bg-white dark:bg-black ">
-      <div
-        className=" bg-white dark:bg-black"
-        key={lead._id} // Note: _id not provided in lead data
-      >
-        <h2 className="text-title-xl  font-extrabold text-black dark:text-white  mb-4">
-          Opportunites Details : -
-        </h2>
-        <h2 className="text-xl font-semibold text-black dark:text-white  mb-4">
-          {`${lead.firstName} ${lead.middleName ? lead.middleName + " " : ""}${
-            lead.lastName
-          }`}
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-2">
-          Email: {lead.email}
-        </p>
-        <p className="text-gray-600 dark:text-gray-400 mb-2">
-          Mobile Number: {lead.number}
-        </p>
-        <p className="text-gray-600 dark:text-gray-400 mb-2">
-          Created By: {lead.createdBy}
-        </p>
-        <p className="text-gray-600 dark:text-gray-400 mb-2">
-          Converted: {lead.isConverted ? "Yes" : "No"}
-        </p>
-      </div>
+    <div className="p-10 text-black dark:text-white">
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : (
+        <div>
+          <h2 className="text-title-xl font-extrabold mb-4 inline-block">
+            Opportunities Details :
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-stroke px-5 py-2 dark:border-strokedark bg-white dark:bg-black">
+            <div className="bg-white dark:bg-black">
+              <h2 className="text-xl font-semibold mb-4">
+                {`${opportunity.firstName} ${
+                  opportunity.middleName ? opportunity.middleName + " " : ""
+                }${opportunity.lastName}`}
+              </h2>
+              <p className="text-gray-600 mb-2">Email: {opportunity.email}</p>
+              <p className="text-gray-600 mb-2">
+                Mobile Number: {opportunity.number}
+              </p>
+              <p className="text-gray-600 mb-2">
+                Created By: {opportunity.createdBy}
+              </p>
+              <p className="text-gray-600 mb-2">
+                KYC Status: {opportunity.kycStatus}
+              </p>
+            </div>
+            <div className="bg-white dark:bg-black">
+              <h2 className="text-title-md font-extrabold mb-4">Address:</h2>
+              <p className="text-gray-600 mb-2">
+                Street: {opportunity.address.street}
+              </p>
+              <p className="text-gray-600 mb-2">
+                City: {opportunity.address.city}
+              </p>
+              <p className="text-gray-600 mb-2">
+                State: {opportunity.address.state}
+              </p>
+              <p className="text-gray-600 mb-2">
+                Pincode: {opportunity.address.pinCode}
+              </p>
+              <p className="text-gray-600 mb-2">
+                Country: {opportunity.address.country}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -33,13 +33,12 @@ const ViewOpportunites = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${BASE_URL}/user/lead/${id}`, {
+      await axios.delete(`${BASE_URL}/user/opportunity/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      setOpportunities(opportunities.filter((item) => item._id !== id)); // Update context state
+      setOpportunities(opportunities.filter((item) => item._id !== id));
     } catch (error) {
       console.error(error.response.data.message);
     }
@@ -98,7 +97,9 @@ const ViewOpportunites = () => {
                     <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
                       <div className="flex gap-2 justify-center">
                         <button
-                          onClick={() => navigate(`/user/lead/${item._id}`)}
+                          onClick={() =>
+                            navigate(`/user/opportunity/${item._id}`)
+                          }
                         >
                           <FaEye />
                         </button>
