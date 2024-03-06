@@ -24,6 +24,7 @@ const EditLead = () => {
     pinCode: "",
     country: "",
     occupation: "",
+    leadStatus: "",
   });
 
   useEffect(() => {
@@ -51,6 +52,7 @@ const EditLead = () => {
           pinCode: response.data.data.lead.address.pinCode || "",
           country: response.data.data.lead.address.country || "",
           occupation: response.data.data.lead.occupation || "",
+          leadStatus: response.data.data.lead.leadStatus || "",
         });
         setLoading(false);
       } catch (error) {
@@ -182,20 +184,40 @@ const EditLead = () => {
             </div>
           </div>
           {/* Occupation */}
-          <div className="mb-4.5">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Occupation <span className="text-meta-1">*</span>
-            </label>
-            <input
-              type="text"
-              name="occupation"
-              placeholder="Occupation"
-              value={formData.occupation}
-              onChange={handleInputChange}
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
+          <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
+            <div className="w-full xl:w-1/2">
+              <label className="mb-2.5 block text-black dark:text-white">
+                Occupation <span className="text-meta-1">*</span>
+              </label>
+              <input
+                type="text"
+                name="occupation"
+                placeholder="Occupation"
+                value={formData.occupation}
+                onChange={handleInputChange}
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+              />
+            </div>
+            <div className="w-full xl:w-1/2">
+              <label className="mb-2.5 block text-black dark:text-white">
+                Lead Status <span className="text-meta-1">*</span>
+              </label>
+              <select
+                name="gender"
+                value={formData.leadStatus}
+                onChange={handleInputChange}
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+              >
+                <option disabled>Select </option>
+                <option value="Not Contacted">Not Contacted</option>
+                <option value="Contacted">Contacted</option>
+                <option value="Working">Working</option>
+                <option value="Converted">Converted</option>
+                <option value="Not converted">Not converted</option>
+              </select>
+            </div>
           </div>
-          {/* Address */}
+
           <div>
             <h1 className="text-title-sm text-white mb-3">Address:</h1>
             <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
@@ -273,6 +295,8 @@ const EditLead = () => {
               </div>
             </div>
           </div>
+
+          {/* Address */}
           <button
             type="submit"
             className="bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-6 rounded-md transition duration-300"

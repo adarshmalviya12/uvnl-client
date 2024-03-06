@@ -60,6 +60,7 @@ const ViewLead = () => {
               <p className="text-gray-600 mb-2">
                 Converted: {lead.isConverted ? "Yes" : "No"}
               </p>
+              <p className="text-gray-600 mb-2">Status: {lead.leadStatus}</p>
             </div>
             <div className="bg-white dark:bg-black">
               <h2 className="text-title-md font-extrabold mb-4">Address:</h2>
