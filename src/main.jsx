@@ -19,6 +19,7 @@ import EditLead from "./components/user/EditLead.jsx";
 import ViewOpportunites from "./components/user/ViewOpportunites.jsx";
 import { OpportunityProvider } from "./context/OpportunityContext.jsx";
 import ViewOpportunity from "./components/user/ViewOpportunity.jsx";
+import EditOpportunity from "./components/user/EditOpportunity.jsx";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "opportunity",
         element: <ViewOpportunites />,
+      },
+      {
+        path: "opportunity/edit/:opportunityId",
+        element: <EditOpportunity />,
       },
     ],
   },

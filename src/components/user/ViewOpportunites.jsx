@@ -104,7 +104,7 @@ const ViewOpportunites = () => {
                         </button>
                         <button
                           onClick={() =>
-                            navigate(`/user/lead/edit/${item._id}`)
+                            navigate(`/user/opportunity/edit/${item._id}`)
                           }
                         >
                           <FaEdit />

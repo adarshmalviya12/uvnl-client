@@ -1,6 +1,11 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import BASE_URL from "../../constant";
+import axios from "axios";
+
 const EditOpportunity = () => {
-  const { leadId } = useParams();
-  const [lead, setLead] = useState({});
+  const { opportunityId } = useParams();
+  const [opportunity, setOpportunity] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -12,6 +17,7 @@ const EditOpportunity = () => {
     email: "",
     number: "",
     leadSource: "",
+    kycStatus: "",
     dob: "",
     street: "",
     city: "",
@@ -19,8 +25,47 @@ const EditOpportunity = () => {
     pinCode: "",
     country: "",
     occupation: "",
-    leadStatus: "",
   });
+
+  useEffect(() => {
+    const fetchOpportunity = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `${BASE_URL}/user/opportunity/${opportunityId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setOpportunity(response.data.data.opportunity);
+        setFormData({
+          firstName: response.data.data.opportunity.firstName || "",
+          middleName: response.data.data.opportunity.middleName || "",
+          lastName: response.data.data.opportunity.lastName || "",
+          gender: response.data.data.opportunity.gender || "",
+          email: response.data.data.opportunity.email || "",
+          number: response.data.data.opportunity.number || "",
+          leadSource: response.data.data.opportunity.leadSource || "",
+          dob: response.data.data.opportunity.dob || "",
+          street: response.data.data.opportunity.address.street || "",
+          city: response.data.data.opportunity.address.city || "",
+          state: response.data.data.opportunity.address.state || "",
+          pinCode: response.data.data.opportunity.address.pinCode || "",
+          country: response.data.data.opportunity.address.country || "",
+          occupation: response.data.data.opportunity.occupation || "",
+          kycStatus: response.data.data.opportunity.kycStatus || "",
+        });
+        setLoading(false);
+      } catch (error) {
+        setError(error.response.data.message);
+        setLoading(false);
+      }
+    };
+
+    fetchOpportunity();
+  }, [opportunityId]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,9 +75,18 @@ const EditOpportunity = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData);
+      const token = localStorage.getItem("token");
+      await axios.patch(
+        `${BASE_URL}/user/opportunity/${opportunityId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       // Add success notification or redirect
-      alert("Lead updated successfully!");
+      alert("Opportunity updated successfully!");
     } catch (error) {
       alert(error.response.data.message);
       // Add error notification
@@ -153,20 +207,20 @@ const EditOpportunity = () => {
             </div>
             <div className="w-full xl:w-1/2">
               <label className="mb-2.5 block text-black dark:text-white">
-                Lead Status <span className="text-meta-1">*</span>
+                Kyc Status <span className="text-meta-1">*</span>
               </label>
               <select
-                name="leadStatus"
-                value={formData.leadStatus}
+                name="kycStatus"
+                value={formData.kycStatus}
                 onChange={handleInputChange}
                 className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               >
                 <option disabled>Select </option>
-                <option value="Not Contacted">Not Contacted</option>
-                <option value="Contacted">Contacted</option>
-                <option value="Working">Working</option>
-                <option value="Converted">Converted</option>
-                <option value="Not converted">Not converted</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Pending">Pending</option>
+                <option value="Needs">Needs</option>
+                <option value="Clarification">Clarification</option>
               </select>
             </div>
           </div>
