@@ -1,9 +1,4 @@
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import BASE_URL from "../../constant";
-import { useEffect, useState } from "react";
-
-const EditLead = () => {
+const EditOpportunity = () => {
   const { leadId } = useParams();
   const [lead, setLead] = useState({});
   const [loading, setLoading] = useState(true);
@@ -27,43 +22,6 @@ const EditLead = () => {
     leadStatus: "",
   });
 
-  useEffect(() => {
-    const fetchLead = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get(`${BASE_URL}/user/lead/${leadId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setLead(response.data.data.lead);
-        setFormData({
-          firstName: response.data.data.lead.firstName || "",
-          middleName: response.data.data.lead.middleName || "",
-          lastName: response.data.data.lead.lastName || "",
-          gender: response.data.data.lead.gender || "",
-          email: response.data.data.lead.email || "",
-          number: response.data.data.lead.number || "",
-          leadSource: response.data.data.lead.leadSource || "",
-          dob: response.data.data.lead.dob || "",
-          street: response.data.data.lead.address.street || "",
-          city: response.data.data.lead.address.city || "",
-          state: response.data.data.lead.address.state || "",
-          pinCode: response.data.data.lead.address.pinCode || "",
-          country: response.data.data.lead.address.country || "",
-          occupation: response.data.data.lead.occupation || "",
-          leadStatus: response.data.data.lead.leadStatus || "",
-        });
-        setLoading(false);
-      } catch (error) {
-        setError(error.response.data.message);
-        setLoading(false);
-      }
-    };
-
-    fetchLead();
-  }, [leadId]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -72,12 +30,7 @@ const EditLead = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
-      await axios.patch(`${BASE_URL}/user/lead/${leadId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      console.log(formData);
       // Add success notification or redirect
       alert("Lead updated successfully!");
     } catch (error) {
@@ -308,5 +261,4 @@ const EditLead = () => {
     </div>
   );
 };
-
-export default EditLead;
+export default EditOpportunity;

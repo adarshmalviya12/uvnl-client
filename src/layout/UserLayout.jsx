@@ -6,12 +6,14 @@ import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import BASE_URL from "../constant";
 import { useLeads } from "../context/LeadContext";
+import { useOpportunities } from "../context/OpportunityContext";
 
 const UserLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const { setUser } = useAuth();
   const { setLeads } = useLeads();
+  const { setOpportunities } = useOpportunities();
   const token = localStorage.getItem("token");
 
   const fetchUser = async () => {

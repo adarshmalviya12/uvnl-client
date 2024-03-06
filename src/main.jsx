@@ -17,6 +17,7 @@ import { LeadProvider } from "./context/LeadContext.jsx";
 import ViewLead from "./components/user/ViewLead.jsx";
 import EditLead from "./components/user/EditLead.jsx";
 import ViewOpportunites from "./components/user/ViewOpportunites.jsx";
+import { OpportunityProvider } from "./context/OpportunityContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -80,7 +81,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthProvider>
       <UsersProvider>
         <LeadProvider>
-          <RouterProvider router={router} />
+          <OpportunityProvider>
+            <RouterProvider router={router} />
+          </OpportunityProvider>
         </LeadProvider>
       </UsersProvider>
     </AuthProvider>
