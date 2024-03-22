@@ -3,7 +3,6 @@ import DeleteButton from "./DeleteButton";
 import { useLeads } from "../../context/LeadContext";
 import { useNavigate } from "react-router-dom";
 import CreateOppotunityModel from "./CreateOppotunityModel";
-
 const ViewOpportunites = () => {
   const { leads } = useLeads();
 
