@@ -24,6 +24,8 @@ import { UsersProvider } from "./context/UsersContext.jsx";
 import { LeadProvider } from "./context/LeadContext.jsx";
 import Loader from "./components/Loader.jsx";
 import LeadPage from "./components/user/LeadPage.jsx";
+import UserProfile from "./components/user/UserProfile.jsx";
+import Setting from "./components/user/Setting.jsx";
 
 const ViewLead = lazy(() => import("./components/user/ViewLead.jsx"));
 const EditLead = lazy(() => import("./components/user/EditLead.jsx"));
@@ -83,6 +85,14 @@ const router = createBrowserRouter([
       {
         path: "opportunity",
         element: <ViewOpportunites />,
+      },
+      {
+        path: "profile",
+        element: <UserProfile />,
+      },
+      {
+        path: "setting",
+        element: <Setting />,
       },
     ],
   },
