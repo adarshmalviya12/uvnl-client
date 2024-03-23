@@ -5,13 +5,11 @@ import AdminSidebar from "../components/AdminSidebar";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import BASE_URL from "../constant";
-import { useUsers } from "../context/UsersContext";
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const { setUser } = useAuth();
-  const { setUsers } = useUsers();
   const token = localStorage.getItem("token");
 
   const fetchUser = async () => {
@@ -25,23 +23,8 @@ const AdminLayout = () => {
     } catch (error) {}
   };
 
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/admin/users`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setUsers(response.data.data.users);
-    } catch (error) {
-      console.error(error.response.data.message);
-    }
-  };
-
   useEffect(() => {
     fetchUser();
-    fetchUsers();
   }, []);
 
   return (
