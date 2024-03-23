@@ -5,15 +5,11 @@ import UserSidebar from "../components/UserSidebar";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import BASE_URL from "../constant";
-import { useLeads } from "../context/LeadContext";
-import { useOpportunities } from "../context/OpportunityContext";
 
 const UserLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const { setUser } = useAuth();
-  const { setLeads } = useLeads();
-  const { setOpportunities } = useOpportunities();
   const token = localStorage.getItem("token");
 
   const fetchUser = async () => {
@@ -29,23 +25,8 @@ const UserLayout = () => {
     }
   };
 
-  const fetchLeads = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/user/leads`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setLeads(response.data.data.leads);
-    } catch (error) {
-      console.error(error.response.data.message);
-    }
-  };
-
   useEffect(() => {
     fetchUser();
-    fetchLeads();
   }, []);
 
   return (

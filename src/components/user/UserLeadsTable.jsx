@@ -5,7 +5,7 @@ import { useLeads } from "../../context/LeadContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BASE_URL from "../../constant";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const UserLeadsTable = () => {
   const { leads, setLeads } = useLeads();
@@ -15,6 +15,20 @@ const UserLeadsTable = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+
+  const fetchLeads = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/user/leads`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setLeads(response.data.data.leads);
+    } catch (error) {
+      console.error(error.response.data.message);
+    }
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -37,6 +51,9 @@ const UserLeadsTable = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  useEffect(() => {
+    fetchLeads();
+  }, []);
   return (
     <>
       <div className="flex justify-between items-center text-title-lg mb-3   ">

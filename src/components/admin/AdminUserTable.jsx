@@ -3,9 +3,11 @@ import DeleteButton from "./DeleteButton";
 
 import CreateUser from "./CreateUser";
 import { useUsers } from "../../context/UsersContext";
+import { useNavigate } from "react-router-dom";
 
 const AdminUserTable = () => {
   const { users } = useUsers();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -51,7 +53,11 @@ const AdminUserTable = () => {
                     </td>
                     <td className="border-b border-[#eee] py-3 px-2 pl-9  dark:border-strokedark xl:pl-11">
                       <div className="flex gap-2 justify-center  ">
-                        <button>{<FaEye />}</button>
+                        <button
+                          onClick={() => navigate(`/admin/user/${user?._id}`)}
+                        >
+                          {<FaEye />}
+                        </button>
                         <button>{<FaEdit />}</button>
                         <DeleteButton
                           onDelete={() => handleDelete(user?._id)}

@@ -32,6 +32,7 @@ const ViewOpportunites = lazy(() =>
 import { OpportunityProvider } from "./context/OpportunityContext.jsx";
 import ViewOpportunity from "./components/user/ViewOpportunity.jsx";
 import EditOpportunity from "./components/user/EditOpportunity.jsx";
+import ViewUser from "./components/admin/ViewUser.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <AdminProfile />,
+      },
+      {
+        path: "user/:userId",
+        element: <ViewUser />,
       },
       {
         path: "settings",
