@@ -8,11 +8,7 @@ const EditUserDetails = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    email: "",
-    // Add more fields as needed
-  });
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     const fetchUser = async () => {
