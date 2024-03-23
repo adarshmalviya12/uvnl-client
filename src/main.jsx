@@ -29,6 +29,10 @@ const EditLead = lazy(() => import("./components/user/EditLead.jsx"));
 const ViewOpportunites = lazy(() =>
   import("./components/user/ViewOpportunites.jsx")
 );
+import { OpportunityProvider } from "./context/OpportunityContext.jsx";
+import ViewOpportunity from "./components/user/ViewOpportunity.jsx";
+import EditOpportunity from "./components/user/EditOpportunity.jsx";
+import ViewUser from "./components/admin/ViewUser.jsx";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <AdminProfile />,
+      },
+      {
+        path: "user/:userId",
+        element: <ViewUser />,
       },
       {
         path: "settings",
@@ -76,12 +84,16 @@ const router = createBrowserRouter([
         element: <EditLead />,
       },
       {
-        path: "opportunity",
-        element: <ViewOpportunites />,
+        path: "opportunity/:opportunityId",
+        element: <ViewOpportunity />,
       },
       {
         path: "opportunity",
         element: <ViewOpportunites />,
+      },
+      {
+        path: "opportunity/edit/:opportunityId",
+        element: <EditOpportunity />,
       },
     ],
   },
@@ -92,9 +104,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthProvider>
       <UsersProvider>
         <LeadProvider>
-          <Suspense fallback={<Loader />}>
-            <RouterProvider router={router} />
-          </Suspense>
+          <OpportunityProvider>
+            <Suspense fallback={<Loader />}>
+              <RouterProvider router={router} />
+            </Suspense>
+          </OpportunityProvider>
         </LeadProvider>
       </UsersProvider>
     </AuthProvider>
