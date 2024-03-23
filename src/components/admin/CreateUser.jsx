@@ -40,18 +40,17 @@ const CreateUser = () => {
         }
       );
 
-      setUsers((prevUsers) => [...prevUsers, newUser]);
       setUser(response.data.data);
+      setUsers((prevUsers) => [...prevUsers, user]);
       ///
       setFirstName("");
       setEmail("");
       setPassword("");
       setLastName("");
       setNumber("");
-      //'s
       setShowModal(false);
     } catch (error) {
-      setErrorMessage(error.response.data.message);
+      setErrorMessage(error?.response.data.message);
       alert(errorMessage);
     }
   };
