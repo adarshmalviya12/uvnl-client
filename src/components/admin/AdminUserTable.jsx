@@ -4,10 +4,27 @@ import DeleteButton from "./DeleteButton";
 import CreateUser from "./CreateUser";
 import { useUsers } from "../../context/UsersContext";
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../../constant";
+import axios from "axios";
 
 const AdminUserTable = () => {
   const { users } = useUsers();
   const navigate = useNavigate();
+
+  const handleDelete = async (id) => {
+    try {
+      console.log("hiir");
+      await axios.delete(`${BASE_URL}/admin/user/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setUsers(users.filter((item) => item._id !== id));
+    } catch (error) {
+      console.error("error", error?.response.data.message);
+    }
+  };
 
   return (
     <>
