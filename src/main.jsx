@@ -1,38 +1,47 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+// import App from "./App.jsx";
+const App = React.lazy(() => import("./App.jsx"));
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import { lazy } from "react";
+import Loader from "./components/Loader.jsx";
+
 // import components
 
-const AdminLogin = lazy(() => import("./pages/AdminLogin.jsx"));
-const AdminLayout = lazy(() => import("./layout/AdminLayout.jsx"));
-const AdminProfile = lazy(() => import("./components/admin/AdminProfile.jsx"));
-const AdminSettings = lazy(() =>
+// Import components using default import
+const AdminLogin = React.lazy(() => import("./pages/AdminLogin.jsx"));
+const AdminLayout = React.lazy(() => import("./layout/AdminLayout.jsx"));
+const AdminProfile = React.lazy(() =>
+  import("./components/admin/AdminProfile.jsx")
+);
+const AdminSettings = React.lazy(() =>
   import("./components/admin/AdminSettings.jsx")
 );
-const UserLayout = lazy(() => import("./layout/UserLayout.jsx"));
-const UserLeadsTable = lazy(() =>
+const UserLayout = React.lazy(() => import("./layout/UserLayout.jsx"));
+const UserLeadsTable = React.lazy(() =>
   import("./components/user/UserLeadsTable.jsx")
 );
-const AdminUserTable = lazy(() =>
+const AdminUserTable = React.lazy(() =>
   import("./components/admin/AdminUserTable.jsx")
 );
+const ViewLead = React.lazy(() => import("./components/user/ViewLead.jsx"));
+const EditLead = React.lazy(() => import("./components/user/EditLead.jsx"));
+const ViewOpportunites = React.lazy(() =>
+  import("./components/user/ViewOpportunites.jsx")
+);
+const ViewOpportunity = React.lazy(() =>
+  import("./components/user/ViewOpportunity.jsx")
+);
+const EditOpportunity = React.lazy(() =>
+  import("./components/user/EditOpportunity.jsx")
+);
+const ViewUser = React.lazy(() => import("./components/admin/ViewUser.jsx"));
+
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { UsersProvider } from "./context/UsersContext.jsx";
 import { LeadProvider } from "./context/LeadContext.jsx";
-import Loader from "./components/Loader.jsx";
-
-const ViewLead = lazy(() => import("./components/user/ViewLead.jsx"));
-const EditLead = lazy(() => import("./components/user/EditLead.jsx"));
-const ViewOpportunites = lazy(() =>
-  import("./components/user/ViewOpportunites.jsx")
-);
 import { OpportunityProvider } from "./context/OpportunityContext.jsx";
-import ViewOpportunity from "./components/user/ViewOpportunity.jsx";
-import EditOpportunity from "./components/user/EditOpportunity.jsx";
-import ViewUser from "./components/admin/ViewUser.jsx";
+import EditUserDetails from "./components/admin/EditUserDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "user/:userId",
         element: <ViewUser />,
+      },
+      {
+        path: "user/edit/:userId",
+        element: <EditUserDetails />,
       },
       {
         path: "settings",

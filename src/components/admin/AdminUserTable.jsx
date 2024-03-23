@@ -19,7 +19,7 @@ const AdminUserTable = () => {
       </div>
       <div className="">
         <div className="max-w-full overflow-x-auto">
-          <table className="w-full table-auto">
+          <table className=" bg-white w-full table-auto">
             <thead>
               <tr className="bg-bodydark  text-left dark:bg-black">
                 <th className="min-w-[100px]  py-4 px-4 font-bold text-black dark:text-white xl:pl-11">
@@ -58,7 +58,13 @@ const AdminUserTable = () => {
                         >
                           {<FaEye />}
                         </button>
-                        <button>{<FaEdit />}</button>
+                        <button
+                          onClick={() =>
+                            navigate(`/admin/user/edit/${user?._id}`)
+                          }
+                        >
+                          {<FaEdit />}
+                        </button>
                         <DeleteButton
                           onDelete={() => handleDelete(user?._id)}
                         />
