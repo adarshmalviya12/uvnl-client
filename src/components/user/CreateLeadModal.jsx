@@ -5,9 +5,7 @@ import BASE_URL from "../../constant";
 
 const CreateLeadModel = () => {
   const [showModal, setShowModal] = useState(false);
-
   const [errorMessage, setErrorMessage] = useState("");
-  const [lead, setLead] = useState();
 
   const [formData, setFormData] = useState({
     firstName: "",

@@ -1,4 +1,10 @@
+import CategoryTable from "./CategoryTable";
+
 const Category = () => {
-  return <div>Category</div>;
+  return (
+    <>
+      <CategoryTable />
+    </>
+  );
 };
 export default Category;

@@ -5,7 +5,6 @@ import BASE_URL from "../../constant";
 
 const CreateUser = () => {
   const [showModal, setShowModal] = useState(false);
-  const [user, setUser] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
 
   const [email, setEmail] = useState("");
@@ -40,9 +39,7 @@ const CreateUser = () => {
         }
       );
 
-      setUser(response.data.createdUser);
       setUsers((prevUsers) => [...prevUsers, response.data.data.createdUser]);
-      ///
       setFirstName("");
       setEmail("");
       setPassword("");
