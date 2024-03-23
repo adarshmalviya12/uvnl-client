@@ -16,7 +16,6 @@ const AdminUserTable = () => {
 
   const token = localStorage.getItem("token");
   const fetchUsers = async () => {
-    console.log("hiirss", users);
     try {
       const response = await axios.get(`${BASE_URL}/admin/users`, {
         headers: {

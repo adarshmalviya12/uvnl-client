@@ -40,8 +40,8 @@ const CreateUser = () => {
         }
       );
 
-      setUser(response.data.data);
-      setUsers((prevUsers) => [...prevUsers, user]);
+      setUser(response.data.createdUser);
+      setUsers((prevUsers) => [...prevUsers, response.data.data.createdUser]);
       ///
       setFirstName("");
       setEmail("");
