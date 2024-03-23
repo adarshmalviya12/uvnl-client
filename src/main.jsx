@@ -42,6 +42,8 @@ import { UsersProvider } from "./context/UsersContext.jsx";
 import { LeadProvider } from "./context/LeadContext.jsx";
 import { OpportunityProvider } from "./context/OpportunityContext.jsx";
 import EditUserDetails from "./components/admin/EditUserDetails.jsx";
+import Category from "./components/admin/Category.jsx";
+import Products from "./components/admin/Products.jsx";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +62,14 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <AdminUserTable />,
+      },
+      {
+        path: "category",
+        element: <Category />,
+      },
+      {
+        path: "products",
+        element: <Products />,
       },
       {
         path: "profile",

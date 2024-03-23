@@ -1,7 +1,7 @@
 const AdminProfile = () => {
   return (
     <div>
-      <div>hello</div>
+      <div>Profile</div>
     </div>
   );
 };
