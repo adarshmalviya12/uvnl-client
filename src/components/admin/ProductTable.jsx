@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Loader from "../Loader";
 import BASE_URL from "../../constant";
 import axios from "axios";
+import CreateProduct from "./CreateProduct";
 
 const ProductTable = () => {
   const [products, setProducts] = useState([]);
@@ -41,7 +42,7 @@ const ProductTable = () => {
           <div className="flex justify-between items-center text-title-lg mb-3   ">
             <h1 className="text-black dark:text-white">Users</h1>
             <div className="max-h-132.5">
-              {/* <CreateCategory setCategories={setCategories} /> */}
+              <CreateProduct setProducts={setProducts} />
             </div>
           </div>
           <div className="">

@@ -38,7 +38,7 @@ const CreateCategory = ({ setCategories }) => {
       ]);
       setShowModal(false);
     } catch (error) {
-      console.error("Error creating lead:", error);
+      console.error("Error Creating Category:", error);
       setErrorMessage(error.response?.data?.message || "An error occurred");
     }
   };

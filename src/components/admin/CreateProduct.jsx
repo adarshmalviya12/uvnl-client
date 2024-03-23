@@ -1,105 +1,185 @@
-import { useEffect, useState } from "react";
-import Loader from "../Loader";
-import BASE_URL from "../../constant";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import BASE_URL from "../../constant";
 
-const CreateProduct = () => {
-  const [product, setProduct] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const CreateProduct = ({ setProducts }) => {
+  const [categories, setCategories] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [formData, setFormData] = useState({
+    product: "",
+    details: "",
+    description: "",
+    categoryId: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setErrorMessage("");
+  };
 
   const token = localStorage.getItem("token");
 
-  const fetchProducts = async () => {
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.get(`${BASE_URL}/admin/products`, {
+      const response = await axios.post(`${BASE_URL}/admin/product`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      setProduct(response.data.data.products);
-      setLoading(false);
+      setProducts((prevProduct) => [
+        ...prevProduct,
+        response.data.data.newProduct,
+      ]);
+      setShowModal(false);
     } catch (error) {
-      setError(error.response.data.message);
-      setLoading(false);
+      console.error("Error creating Product:", error);
+      setErrorMessage(error.response?.data?.message || "An error occurred");
     }
   };
 
   useEffect(() => {
-    fetchProducts();
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/admin/categories`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setCategories(response.data.data.categories);
+        setLoading(false);
+      } catch (error) {
+        setErrorMessage(error.response.data.message);
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <p>Error: {error}</p>
-      ) : (
+      <button
+        className=" bg-primary  text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        type="button"
+        onClick={() => setShowModal(true)}
+      >
+        Create Product
+      </button>
+      {showModal ? (
         <>
-          <div className="flex justify-between items-center text-title-lg mb-3   ">
-            <h1 className="text-black dark:text-white">Users</h1>
-            <div className="max-h-132.5">
-              <CreateCategory setCategories={setCategories} />
+          <div className="justify-center z-9999 items-center flex overflow-x-hidden overflow-y-auto  md:max-h-171.5 fixed inset-0  outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-black outline-none focus:outline-none">
+                {/*header*/}
+                <div className="border-b border-stroke px-5 py-2 dark:border-strokedark">
+                  <h3 className="font-medium text-black dark:text-white">
+                    Create Product
+                  </h3>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto overflow-y-auto max-h-80 md:max-h-90 lg:max-h-115">
+                  <form action="" className="font-thin text-sm ">
+                    {/* name  */}
+                    <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
+                      <div className="w-full xl:w-1/3">
+                        <label className="mb-2.5 block text-black dark:text-white">
+                          Name <span className="text-meta-1">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder="Enter Product Name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
+
+                      <div className="w-full xl:w-1/3">
+                        <label className="mb-2.5 block text-black dark:text-white">
+                          details <span className="text-meta-1">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="details"
+                          placeholder="details"
+                          value={formData.details}
+                          onChange={handleInputChange}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
+
+                      <div className="w-full xl:w-1/3">
+                        <label className="mb-2.5 block text-black dark:text-white">
+                          description <span className="text-meta-1">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="description"
+                          placeholder="enter decription"
+                          value={formData.description}
+                          onChange={handleInputChange}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
+                      <div className="w-full xl:w-1/3">
+                        <label className="mb-2.5 block text-black dark:text-white">
+                          Category <span className="text-meta-1">*</span>
+                        </label>
+                        <select
+                          name="categoryId"
+                          value={formData.categoryId}
+                          onChange={handleInputChange}
+                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        >
+                          <option value="" disabled>
+                            select
+                          </option>
+                          {categories &&
+                            categories.map((item) => (
+                              <option value={item._id}>{item.name}</option>
+                            ))}
+                        </select>
+                      </div>
+                      <div className="w-full xl:w-1/3"></div>
+                      <div className="w-full xl:w-1/3"></div>
+                    </div>
+                    {errorMessage && (
+                      <p className="text-danger">{errorMessage}</p>
+                    )}
+                  </form>
+                </div>
+                {/*footer*/}
+                <div className="flex items-center text-title-sm justify-end gap-2 p-4 border-t border-solid border-blueGray-200 rounded-b">
+                  <button
+                    className="inline-flex items-center justify-center bg-danger py-1 px-2 text-center font-normal text-white hover:bg-opacity-90 md:px-2 xl:px-4"
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="inline-flex items-center justify-center bg-primary py-1 px-2 text-center font-normal  text-white hover:bg-opacity-90 md:px-2 xl:px-4"
+                    type="button"
+                    onClick={handleFormSubmit}
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="">
-            <div className="max-w-full overflow-x-auto">
-              <table className=" bg-white w-full table-auto">
-                <thead>
-                  <tr className="bg-bodydark  text-left dark:bg-black">
-                    <th className="min-w-[100px]  py-4 px-4 font-bold text-black dark:text-white xl:pl-11">
-                      Name
-                    </th>
-
-                    <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
-                      Category
-                    </th>
-                    <th className="min-w-[100px] py-4 px-4  font-bold text-black dark:text-white">
-                      details
-                    </th>
-                    <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
-                      description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {categories.length !== 0 ? (
-                    categories?.map((item) => (
-                      <tr className="  dark:bg-graydark" key={item?._id}>
-                        <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                          {item?.name}
-                        </td>
-
-                        <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                          {item?.details}
-                        </td>
-                        <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                          {item?.description}
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr className="  dark:bg-meta-4">
-                      <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                        empty
-                      </td>
-
-                      <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                        empty
-                      </td>
-                      <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                        empty
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
-      )}
+      ) : null}
     </>
   );
 };
