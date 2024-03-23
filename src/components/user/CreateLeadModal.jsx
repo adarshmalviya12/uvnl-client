@@ -45,6 +45,7 @@ const CreateLeadModel = () => {
     } catch (error) {
       console.error("Error creating lead:", error);
       setErrorMessage(error.response?.data?.message || "An error occurred");
+      alert(errorMessage);
     }
   };
 

@@ -15,6 +15,7 @@ const CreateCategory = ({ setCategories }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setErrorMessage("");
   };
 
   const token = localStorage.getItem("token");
@@ -110,6 +111,9 @@ const CreateCategory = ({ setCategories }) => {
                         />
                       </div>
                     </div>
+                    {errorMessage && (
+                      <p className="text-danger">{errorMessage}</p>
+                    )}
                   </form>
                 </div>
                 {/*footer*/}

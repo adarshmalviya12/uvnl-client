@@ -2,24 +2,23 @@ import { useEffect, useState } from "react";
 import Loader from "../Loader";
 import BASE_URL from "../../constant";
 import axios from "axios";
-import CreateCategory from "./CreateCategory";
 
-const CategoryTable = () => {
-  const [categories, setCategories] = useState([]);
+const CreateProduct = () => {
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const token = localStorage.getItem("token");
 
-  const fetchCategories = async () => {
+  const fetchProducts = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/admin/categories`, {
+      const response = await axios.get(`${BASE_URL}/admin/products`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      setCategories(response.data.data.categories);
+      setProduct(response.data.data.products);
       setLoading(false);
     } catch (error) {
       setError(error.response.data.message);
@@ -28,8 +27,9 @@ const CategoryTable = () => {
   };
 
   useEffect(() => {
-    fetchCategories();
+    fetchProducts();
   }, []);
+
   return (
     <>
       {loading ? (
@@ -53,6 +53,9 @@ const CategoryTable = () => {
                       Name
                     </th>
 
+                    <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
+                      Category
+                    </th>
                     <th className="min-w-[100px] py-4 px-4  font-bold text-black dark:text-white">
                       details
                     </th>
@@ -100,4 +103,4 @@ const CategoryTable = () => {
     </>
   );
 };
-export default CategoryTable;
+export default CreateProduct;

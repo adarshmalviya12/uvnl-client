@@ -1,4 +1,10 @@
+import ProductTable from "./ProductTable";
+
 const Products = () => {
-  return <div>Products</div>;
+  return (
+    <>
+      <ProductTable />
+    </>
+  );
 };
 export default Products;
