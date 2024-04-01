@@ -8,7 +8,7 @@ import BASE_URL from "../../constant";
 
 const UserLeadsTable = ({ leads, setLeads }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const leadsPerPage = 5; // Number of leads to display per page
+  const leadsPerPage = 5;
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");

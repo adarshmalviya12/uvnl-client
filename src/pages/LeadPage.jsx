@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useLeads } from "../context/LeadContext";
 import BASE_URL from "../constant";
 
-const UserPage = () => {
+const LeadPage = () => {
   const { leads, setLeads } = useLeads();
 
   const token = localStorage.getItem("token");
@@ -32,4 +32,4 @@ const UserPage = () => {
     </>
   );
 };
-export default UserPage;
+export default LeadPage;

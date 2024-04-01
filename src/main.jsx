@@ -52,7 +52,7 @@ import OpportunityEditAdmin from "./components/admin/OpportunityEditAdmin.jsx";
 // kyc
 import Kyc from "./components/admin/kyc/Kyc.jsx";
 import UserDashboard from "./components/user/UserDashboard.jsx";
-import UserPage from "./pages/UserPage.jsx";
+import LeadPage from "./pages/LeadPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -142,7 +142,7 @@ const router = createBrowserRouter([
       },
       {
         path: "leads",
-        element: <UserPage />,
+        element: <LeadPage />,
       },
       {
         path: "lead/:leadId",
