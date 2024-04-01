@@ -1,6 +1,8 @@
 import { useState } from "react";
+import BASE_URL from "../constant";
+import axios from "axios";
 
-const Convert = () => {
+const Convert = ({ products, leadId }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -12,6 +14,19 @@ const Convert = () => {
   };
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+      await axios.post(`${BASE_URL}/user/convert-lead/${leadId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // Add success notification or redirect
+      alert("User updated successfully!");
+    } catch (error) {
+      alert(error.response.data.message);
+      // Add error notification
+    }
   };
 
   return (
@@ -37,42 +52,30 @@ const Convert = () => {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto overflow-y-auto max-h-80 md:max-h-90 lg:max-h-115">
-                  <form action="" className="font-thin text-sm">
+                  <form
+                    action=""
+                    className="font-thin text-sm"
+                    onSubmit={handleFormSubmit}
+                  >
                     <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
-                      <div className="w-full xl:w-1/2">
+                      <div className="w-full ">
                         <label className="mb-2.5 block text-black dark:text-white">
                           Convert <span className="text-meta-1">*</span>
                         </label>
                         <select
-                          name="gender"
-                          value={formData.gender}
+                          name="product"
+                          value={formData.product} // corrected the value to formData.product
                           onChange={handleInputChange}
                           className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         >
                           <option value="" disabled>
-                            select
+                            Select
                           </option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="other">Other</option>
-                        </select>
-                      </div>
-                      <div className="w-full xl:w-1/2">
-                        <label className="mb-2.5 block text-black dark:text-white">
-                          product<span className="text-meta-1">*</span>
-                        </label>
-                        <select
-                          name="gender"
-                          value={formData.gender}
-                          onChange={handleInputChange}
-                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                        >
-                          <option value="" disabled>
-                            select
-                          </option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="other">Other</option>
+                          {products.map((product, index) => (
+                            <option key={index} value={product.id}>
+                              {product.name}
+                            </option>
+                          ))}
                         </select>
                       </div>
                     </div>
@@ -92,7 +95,7 @@ const Convert = () => {
                     type="button"
                     onClick={handleFormSubmit}
                   >
-                    Save
+                    Convert
                   </button>
                 </div>
               </div>

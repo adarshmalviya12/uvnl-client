@@ -22,11 +22,14 @@ const ViewLead = () => {
   const [lead, setLead] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [products, setProducts] = useState([]);
+  const date = new Date(lead?.dob).toLocaleDateString();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
     const fetchLead = async () => {
       try {
-        const token = localStorage.getItem("token");
         const response = await axios.get(`${BASE_URL}/user/lead/${leadId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -40,7 +43,24 @@ const ViewLead = () => {
       }
     };
 
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/user/products`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setProducts(response.data.data.products);
+        setLoading(false);
+      } catch (error) {
+        setErrorMessage(error.response.data.message);
+        setLoading(false);
+      }
+    };
+
     fetchLead();
+    fetchProducts();
   }, [leadId]);
 
   return (
@@ -55,7 +75,7 @@ const ViewLead = () => {
             Leads Details :
           </h2>
           <div className="text-right mb-2 flex justify-end ">
-            <Convert />
+            <Convert products={products} leadId={lead?._id} />
             <CallModel callonNo={lead.number} />
             <WhatsappModel whatsappNo={lead.number} />
           </div>
@@ -64,7 +84,6 @@ const ViewLead = () => {
               <div className="">
                 {/* Your existing code for the first column */}
                 <p className="text-gray-600 mb-2 flex items-center gap-2">
-                  {" "}
                   <MdPerson />
                   {`${lead.firstName} ${
                     lead.middleName ? lead.middleName + " " : ""
@@ -105,7 +124,7 @@ const ViewLead = () => {
                   <MdWc /> Gender: {lead.gender}
                 </p>
                 <p className="text-gray-600 mb-2 flex items-center gap-2">
-                  <MdDateRange /> Date of Birth: {lead.dob}
+                  <MdDateRange /> Date of Birth: {date}
                 </p>
                 <p className="text-gray-600 mb-2 flex items-center gap-2">
                   <MdCheck /> Converted: {lead.isConverted ? "Yes" : "No"}
