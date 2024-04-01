@@ -44,6 +44,15 @@ import { OpportunityProvider } from "./context/OpportunityContext.jsx";
 import EditUserDetails from "./components/admin/EditUserDetails.jsx";
 import Category from "./components/admin/Category.jsx";
 import Products from "./components/admin/Products.jsx";
+import AdminDashboard from "./components/admin/AdminDashboard.jsx";
+import Opportunity from "./components/admin/Opportunity.jsx";
+import OpportunityViewAdmin from "./components/admin/OpportunityViewAdmin.jsx";
+import OpportunityEditAdmin from "./components/admin/OpportunityEditAdmin.jsx";
+
+// kyc
+import Kyc from "./components/admin/kyc/Kyc.jsx";
+import UserDashboard from "./components/user/UserDashboard.jsx";
+import UserPage from "./pages/UserPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +70,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "dashboard",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "users",
         element: <AdminUserTable />,
       },
       {
@@ -70,6 +83,22 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "opportunities",
+        element: <Opportunity />,
+      },
+      {
+        path: "opportunity/:opportunityId",
+        element: <OpportunityViewAdmin />,
+      },
+      {
+        path: "opportunity",
+        element: <ViewOpportunites />,
+      },
+      {
+        path: "opportunity/edit/:opportunityId",
+        element: <OpportunityEditAdmin />,
       },
       {
         path: "profile",
@@ -87,6 +116,19 @@ const router = createBrowserRouter([
         path: "settings",
         element: <AdminSettings />,
       },
+      // kyc
+      {
+        path: "kyc",
+        element: <Kyc />,
+      },
+      {
+        path: "opportunity/:opportunityId",
+        element: <OpportunityViewAdmin />,
+      },
+      {
+        path: "opportunity",
+        element: <ViewOpportunites />,
+      },
     ],
   },
   //user routes
@@ -96,7 +138,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "dashboard",
-        element: <UserLeadsTable />,
+        element: <UserDashboard />,
+      },
+      {
+        path: "leads",
+        element: <UserPage />,
       },
       {
         path: "lead/:leadId",

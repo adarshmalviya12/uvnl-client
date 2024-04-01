@@ -2,6 +2,17 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import BASE_URL from "../../constant";
 import { useEffect, useState } from "react";
+import {
+  MdPerson,
+  MdEmail,
+  MdPhone,
+  MdDateRange,
+  MdWork,
+  MdCheck,
+  MdLocationOn,
+  MdWc,
+  MdOutlineCardTravel,
+} from "react-icons/md";
 
 const ViewOpportunity = () => {
   const { opportunityId } = useParams();
@@ -44,40 +55,57 @@ const ViewOpportunity = () => {
             Opportunities Details :
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-stroke px-5 py-2 dark:border-strokedark bg-white dark:bg-black">
-            <div className="bg-white dark:bg-black">
-              <h2 className="text-xl font-semibold mb-4">
-                {`${opportunity.firstName} ${
-                  opportunity.middleName ? opportunity.middleName + " " : ""
-                }${opportunity.lastName}`}
-              </h2>
-              <p className="text-gray-600 mb-2">Email: {opportunity.email}</p>
-              <p className="text-gray-600 mb-2">
-                Mobile Number: {opportunity.number}
-              </p>
-              <p className="text-gray-600 mb-2">
-                Created By: {opportunity.createdBy}
-              </p>
-              <p className="text-gray-600 mb-2">
-                KYC Status: {opportunity.kycStatus}
-              </p>
+            <div className="flex-1">
+              <div className="">
+                <p className="text-gray-600 mb-2 flex items-center gap-2">
+                  {" "}
+                  <MdPerson />
+                  {`${opportunity.firstName} ${
+                    opportunity.middleName ? opportunity.middleName + " " : ""
+                  }${opportunity.lastName}`}
+                </p>
+                <p className="text-gray-600 mb-2 flex items-center gap-2">
+                  <MdPhone /> Mobile Number: {opportunity.number}
+                </p>
+                <p className="text-gray-600 mb-2 flex items-center gap-2">
+                  <MdOutlineCardTravel /> Lead Source: {opportunity.leadSource}
+                </p>
+                <p className="text-gray-600 mb-2 flex items-center gap-2">
+                  <MdWork /> Occupation: {opportunity.occupation}
+                </p>
+                <p className="text-gray-600 mb-2 flex items-center gap-2">
+                  Status: {opportunity?.leadStatus}
+                </p>
+              </div>
+              <div className="bg-white dark:bg-black">
+                {opportunity.address ? (
+                  <div>
+                    <MdLocationOn /> {opportunity?.address?.street}
+                    {opportunity?.address.city}, {opportunity?.address.state},
+                    {opportunity?.address.pinCode},{" "}
+                    {opportunity.address.country}
+                  </div>
+                ) : null}
+              </div>
             </div>
-            <div className="bg-white dark:bg-black">
-              <h2 className="text-title-md font-extrabold mb-4">Address:</h2>
-              <p className="text-gray-600 mb-2">
-                Street: {opportunity.address.street}
-              </p>
-              <p className="text-gray-600 mb-2">
-                City: {opportunity.address.city}
-              </p>
-              <p className="text-gray-600 mb-2">
-                State: {opportunity.address.state}
-              </p>
-              <p className="text-gray-600 mb-2">
-                Pincode: {opportunity.address.pinCode}
-              </p>
-              <p className="text-gray-600 mb-2">
-                Country: {opportunity.address.country}
-              </p>
+
+            {/* Second Column */}
+            <div className="flex-1">
+              <div className="">
+                <p className="text-gray-600 mb-2 flex items-center gap-2">
+                  <MdEmail /> Email: {opportunity.email}
+                </p>
+                <p className="text-gray-600 mb-2 flex items-center gap-2">
+                  <MdWc /> Gender: {opportunity.gender}
+                </p>
+                <p className="text-gray-600 mb-2 flex items-center gap-2">
+                  <MdDateRange /> Date of Birth: {opportunity.dob}
+                </p>
+                <p className="text-gray-600 mb-2 flex items-center gap-2">
+                  <MdCheck /> Converted:{" "}
+                  {opportunity.kyc.isConverted ? "Yes" : "No"}
+                </p>
+              </div>
             </div>
           </div>
         </div>

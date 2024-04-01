@@ -1,7 +1,7 @@
 import { FaEdit, FaEye } from "react-icons/fa";
 import DeleteButton from "./DeleteButton";
 import { useNavigate } from "react-router-dom";
-import CreateOppotunityModel from "./CreateOppotunityModel";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BASE_URL from "../../constant";
@@ -33,7 +33,7 @@ const ViewOpportunites = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${BASE_URL}/user/opportunity/${id}`, {
+      await axios.patch(`${BASE_URL}/user/delete-opportunity/${id}`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -56,6 +56,7 @@ const ViewOpportunites = () => {
   useEffect(() => {
     fetchOpportunities();
   }, []);
+
   return (
     <>
       <div className="flex justify-between items-center text-title-lg mb-3">
@@ -63,7 +64,7 @@ const ViewOpportunites = () => {
       </div>
       <div>
         <div className="max-w-full overflow-x-auto">
-          <table className="w-full table-auto">
+          <table className="bg-white w-full table-auto">
             <thead>
               <tr className="bg-bodydark text-left dark:bg-meta-4">
                 <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white xl:pl-11">
@@ -151,4 +152,6 @@ const ViewOpportunites = () => {
     </>
   );
 };
+
+
 export default ViewOpportunites;

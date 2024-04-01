@@ -1,38 +1,21 @@
 import CreateLeadModel from "./CreateLeadModal";
 import { FaEdit, FaEye } from "react-icons/fa";
 import DeleteButton from "./DeleteButton";
-import { useLeads } from "../../context/LeadContext";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BASE_URL from "../../constant";
-import { useEffect, useState } from "react";
 
-const UserLeadsTable = () => {
-  const { leads, setLeads } = useLeads();
+const UserLeadsTable = ({ leads, setLeads }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const leadsPerPage = 5; // Number of leads to display per page
 
   const navigate = useNavigate();
-
   const token = localStorage.getItem("token");
-
-  const fetchLeads = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/user/leads`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setLeads(response.data.data.leads);
-    } catch (error) {
-      console.error(error.response.data.message);
-    }
-  };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${BASE_URL}/user/lead/${id}`, {
+      await axios.patch(`${BASE_URL}/user/delete-lead/${id}`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -51,9 +34,6 @@ const UserLeadsTable = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  useEffect(() => {
-    fetchLeads();
-  }, []);
   return (
     <>
       <div className="flex justify-between items-center text-title-lg mb-3   ">
@@ -62,9 +42,9 @@ const UserLeadsTable = () => {
       </div>
       <div className="">
         <div className="max-w-full overflow-x-auto">
-          <table className="w-full table-auto">
+          <table className=" bg-white w-full table-auto">
             <thead>
-              <tr className="bg-bodydark  text-left dark:bg-meta-4">
+              <tr className="bg-bodydark  text-left dark:bg-black">
                 <th className="min-w-[100px]  py-4 px-4 font-bold text-black dark:text-white xl:pl-11">
                   Name
                 </th>
@@ -83,7 +63,7 @@ const UserLeadsTable = () => {
             <tbody>
               {currentLeads.length !== 0 ? (
                 currentLeads?.map((lead) => (
-                  <tr className="dark:bg-meta-4" key={lead?._id}>
+                  <tr className="  dark:bg-graydark" key={lead?._id}>
                     <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
                       {lead?.firstName} {lead?.lastName}
                     </td>

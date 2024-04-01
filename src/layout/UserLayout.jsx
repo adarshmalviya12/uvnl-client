@@ -30,7 +30,7 @@ const UserLayout = () => {
   }, []);
 
   return (
-    <div className="dark:bg-boxdark-2 dark:text-bodydark">
+    <div className=" bg-meta-2 dark:bg-boxdark-2 dark:text-bodydark ">
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className="flex h-screen overflow-hidden">
         {/* <!-- ===== Sidebar Start ===== --> */}

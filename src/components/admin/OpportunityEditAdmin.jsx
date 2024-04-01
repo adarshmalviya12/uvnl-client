@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import BASE_URL from "../../constant";
 import axios from "axios";
 
-const EditOpportunity = () => {
+const OpportunityEditAdmin = () => {
   const { opportunityId } = useParams();
   const [opportunity, setOpportunity] = useState({});
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,7 @@ const EditOpportunity = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${BASE_URL}/user/opportunity/${opportunityId}`,
+          `${BASE_URL}/admin/opportunity/${opportunityId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ const EditOpportunity = () => {
         });
         setLoading(false);
       } catch (error) {
-        setError(error.response.data.message);
+        setError(error.response?.data.message);
         setLoading(false);
       }
     };
@@ -77,7 +77,7 @@ const EditOpportunity = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.patch(
-        `${BASE_URL}/user/opportunity/${opportunityId}`,
+        `${BASE_URL}/admin/opportunity/${opportunityId}`,
         formData,
         {
           headers: {
@@ -93,7 +93,7 @@ const EditOpportunity = () => {
     }
   };
   return (
-    <div className="relative p-6 flex-auto overflow-y-auto max-h-80 md:max-h-90 lg:max-h-115 bg-white">
+    <div className="relative p-6 bg-white flex-auto overflow-y-auto max-h-80 md:max-h-90 lg:max-h-115">
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -315,4 +315,4 @@ const EditOpportunity = () => {
     </div>
   );
 };
-export default EditOpportunity;
+export default OpportunityEditAdmin;

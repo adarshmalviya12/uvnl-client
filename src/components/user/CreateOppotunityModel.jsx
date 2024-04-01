@@ -1,13 +1,9 @@
 import { useState } from "react";
-import { useLeads } from "../../context/LeadContext";
-import axios from "axios";
-import BASE_URL from "../../constant";
 
 const CreateOppotunityModel = () => {
   const [showModal, setShowModal] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [lead, setLead] = useState();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -30,9 +26,6 @@ const CreateOppotunityModel = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  const { setLeads } = useLeads();
-  const token = localStorage.getItem("token");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
