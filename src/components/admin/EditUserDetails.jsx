@@ -25,7 +25,6 @@ const EditUserDetails = () => {
           lastName: response.data.data.user.lastName || "",
           email: response.data.data.user.email || "",
           number: response.data.data.user.number || "",
-          // Update formData with more fields
         });
         setLoading(false);
       } catch (error) {
@@ -66,7 +65,7 @@ const EditUserDetails = () => {
       ) : error ? (
         <p className="text-red-600 dark:text-red-400">Error: {error}</p>
       ) : (
-        <form className="space-y-4 " onSubmit={handleSubmit}>
+        <form className=" space-y-4 " onSubmit={handleSubmit}>
           {/* Username */}
           <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
             <div className="w-full xl:w-1/2">

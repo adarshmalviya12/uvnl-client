@@ -86,13 +86,13 @@ const EditLead = () => {
     }
   };
   return (
-    <div className="relative p-6 flex-auto overflow-y-auto max-h-80 md:max-h-90 lg:max-h-115">
+    <div className="relative bg-white p-6 flex-auto overflow-y-auto max-h-80 md:max-h-90 lg:max-h-115">
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>Error: {error}</p>
       ) : (
-        <form className="font-thin text-sm" onSubmit={handleSubmit}>
+        <form className="  font-thin text-sm" onSubmit={handleSubmit}>
           {/* Name */}
           <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
             <div className="w-full xl:w-1/2">

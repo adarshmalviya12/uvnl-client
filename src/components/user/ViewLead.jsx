@@ -61,7 +61,7 @@ const ViewLead = () => {
 
     fetchLead();
     fetchProducts();
-  }, [leadId]);
+  }, []);
 
   return (
     <div className="p-10 text-black dark:text-white">
@@ -97,9 +97,6 @@ const ViewLead = () => {
                 </p>
                 <p className="text-gray-600 mb-2 flex items-center gap-2">
                   <MdWork /> Occupation: {lead.occupation}
-                </p>
-                <p className="text-gray-600 mb-2 flex items-center gap-2">
-                  Status: {lead?.leadStatus}
                 </p>
               </div>
               <div className="bg-white dark:bg-black">

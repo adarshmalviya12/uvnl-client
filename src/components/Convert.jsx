@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BASE_URL from "../constant";
 import axios from "axios";
 
 const Convert = ({ products, leadId }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [convertedLeadId, setConvertedLeadId] = useState(null); // New state to store leadId
+
+  useEffect(() => {
+    // Set convertedLeadId when leadId prop changes
+    setConvertedLeadId(leadId);
+  }, [leadId]);
 
   const [formData, setFormData] = useState({});
 
@@ -16,16 +22,24 @@ const Convert = ({ products, leadId }) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.post(`${BASE_URL}/user/convert-lead/${leadId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      await axios.post(
+        `${BASE_URL}/user/convert-lead/${convertedLeadId}`,
+        {
+          leadStatus: "Converted",
+          productId: formData.productId,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       // Add success notification or redirect
-      alert("User updated successfully!");
+      alert("Lead converted successfully!");
+
+      setShowModal(false);
     } catch (error) {
       alert(error.response.data.message);
-      // Add error notification
     }
   };
 
@@ -63,8 +77,8 @@ const Convert = ({ products, leadId }) => {
                           Convert <span className="text-meta-1">*</span>
                         </label>
                         <select
-                          name="product"
-                          value={formData.product} // corrected the value to formData.product
+                          name="productId"
+                          value={formData.productId} // corrected the value to formData.product
                           onChange={handleInputChange}
                           className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         >
@@ -72,7 +86,7 @@ const Convert = ({ products, leadId }) => {
                             Select
                           </option>
                           {products.map((product, index) => (
-                            <option key={index} value={product.id}>
+                            <option key={index} value={product._id}>
                               {product.name}
                             </option>
                           ))}
