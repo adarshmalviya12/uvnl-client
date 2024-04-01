@@ -53,11 +53,15 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
           {/* <!-- Hamburger Toggle BTN --> */}
 
           <Link
-            className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5"
+            className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5  "
             to="/"
           >
             {/* <img src={"/src/logo/logohalfwhite.png"} alt="Logo" /> */}
-            <img src={"/src/logo/logohalfcolor.png"} alt="Logo" />
+            <img
+              src={"/src/logo/logohalfcolor.png"}
+              className="w-14"
+              alt="Logo"
+            />
           </Link>
         </div>
 
