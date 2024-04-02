@@ -23,7 +23,7 @@ const OpportunityLogs = ({ opportunity }) => {
       try {
         if (opportunity && opportunity._id) {
           const response = await axios.get(
-            `${BASE_URL}/opportunity/followups/${opportunity._id}`,
+            `${BASE_URL}/user/opportunity-followup/${opportunity._id}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
