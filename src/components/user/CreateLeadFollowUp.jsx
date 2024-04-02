@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import BASE_URL from "../../constant";
 
-const CreateLeadFollowUp = ({ followUps, setFollowUps }) => {
+const CreateLeadFollowUp = ({ lead, setFollowUps }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const token = localStorage.getItem("token");
@@ -21,6 +21,7 @@ const CreateLeadFollowUp = ({ followUps, setFollowUps }) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    console.log("Lead in ViewLead:", lead);
     try {
       const response = await axios.post(
         `${BASE_URL}/user/followup/${lead._id}`,
@@ -31,18 +32,16 @@ const CreateLeadFollowUp = ({ followUps, setFollowUps }) => {
           },
         }
       );
-      setFollowUps((prevFollowUps) => [
+      setFollowUps((prevFollowUps = []) => [
         ...prevFollowUps,
-        response.data.data.followUp,
+        response.data.data,
       ]);
       setShowModal(false);
     } catch (error) {
       console.error("Error creating follow-up:", error);
       setErrorMessage(error.response?.data?.message || "An error occurred");
-      alert(errorMessage);
     }
   };
-
   return (
     <>
       <button
