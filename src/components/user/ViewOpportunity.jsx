@@ -15,6 +15,7 @@ import {
 import ConvertOpportunity from "./ConvertOpportunity";
 import CallModel from "../CallModel";
 import WhatsappModel from "../WhatsappModel";
+import OpportunityLogs from "./OpportunityLogs";
 
 const ViewOpportunity = () => {
   const { opportunityId } = useParams();
@@ -114,6 +115,9 @@ const ViewOpportunity = () => {
           </div>
         </div>
       )}
+      <div className="mt-5">
+        <OpportunityLogs opportunity={opportunity} />
+      </div>
     </div>
   );
 };

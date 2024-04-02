@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import CreateLeadFollowUp from "./CreateLeadFollowUp";
 import axios from "axios";
 import BASE_URL from "../../constant";
 import formatDate from "../../utils/date";
+import CreateOpportunityFollowUp from "./CreateOpportunityFollowUp";
 
-const LeadLogs = ({ lead }) => {
+const OpportunityLogs = ({ opportunity }) => {
   const [followUps, setFollowUps] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const followUpsPerPage = 5; // Number of follow-ups to display per page
-  // const navigate = useNavigate();
 
   // Logic to paginate follow-ups
   const indexOfLastFollowUp = currentPage * followUpsPerPage;
@@ -18,15 +17,13 @@ const LeadLogs = ({ lead }) => {
     indexOfLastFollowUp
   );
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
   const token = localStorage.getItem("token");
   useEffect(() => {
     const fetchFollowUps = async () => {
       try {
-        if (lead && lead._id) {
+        if (opportunity && opportunity._id) {
           const response = await axios.get(
-            `${BASE_URL}/user/followups/${lead._id}`,
+            `${BASE_URL}/opportunity/followups/${opportunity._id}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
@@ -39,24 +36,24 @@ const LeadLogs = ({ lead }) => {
       }
     };
 
-    if (lead._id) {
+    if (opportunity._id) {
       fetchFollowUps();
     }
-  }, [lead]);
+  }, [opportunity]);
 
   return (
-    <>
-      <CreateLeadFollowUp
+    <div>
+      <CreateOpportunityFollowUp
         followUps={followUps}
         setFollowUps={setFollowUps}
-        lead={lead}
+        opportunity={opportunity}
       />
       <div className="mt-3">
         <div className="max-w-full overflow-x-auto">
-          <table className=" bg-white w-full table-auto">
+          <table className="bg-white w-full table-auto">
             <thead>
-              <tr className="bg-bodydark  text-left dark:bg-black">
-                <th className="min-w-[100px]  py-4 px-4 font-bold text-black dark:text-white xl:pl-11">
+              <tr className="bg-bodydark text-left dark:bg-black">
+                <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white xl:pl-11">
                   Type
                 </th>
                 <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
@@ -76,7 +73,7 @@ const LeadLogs = ({ lead }) => {
             <tbody>
               {currentFollowUps?.length !== 0 ? (
                 currentFollowUps?.map((followUp) => (
-                  <tr className="  dark:bg-graydark" key={followUp._id}>
+                  <tr className="dark:bg-graydark" key={followUp._id}>
                     <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
                       {followUp?.type}
                     </td>
@@ -113,7 +110,7 @@ const LeadLogs = ({ lead }) => {
             (_, i) => (
               <li key={i} className="mx-1">
                 <button
-                  onClick={() => paginate(i + 1)}
+                  onClick={() => setCurrentPage(i + 1)}
                   className="bg-bodydark hover:bg-bodydark text-white font-bold py-2 px-4 rounded"
                   style={{
                     backgroundColor:
@@ -128,7 +125,8 @@ const LeadLogs = ({ lead }) => {
           )}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
-export default LeadLogs;
+
+export default OpportunityLogs;
