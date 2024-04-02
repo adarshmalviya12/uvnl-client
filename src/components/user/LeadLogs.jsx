@@ -5,6 +5,7 @@ import BASE_URL from "../../constant";
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaEye } from "react-icons/fa";
 import DeleteButton from "./DeleteButton";
+import formatDate from "../../utils/date";
 
 const LeadLogs = ({ lead, setLead }) => {
   const [followUps, setFollowUps] = useState([]);
@@ -83,12 +84,10 @@ const LeadLogs = ({ lead, setLead }) => {
                       {followUp?.type}
                     </td>
                     <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                      {new Date(followUp?.followUpDate).toLocaleDateString()}
+                      {formatDate(followUp?.followUpDate)}{" "}
                     </td>
                     <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
-                      {new Date(
-                        followUp?.nextFollowUpDate
-                      ).toLocaleDateString()}
+                      {formatDate(followUp?.nextFollowUpDate)}
                     </td>
                     <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
                       {followUp.remarks}
