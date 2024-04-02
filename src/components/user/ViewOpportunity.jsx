@@ -8,17 +8,20 @@ import {
   MdPhone,
   MdDateRange,
   MdWork,
-  MdCheck,
   MdLocationOn,
   MdWc,
   MdOutlineCardTravel,
 } from "react-icons/md";
+import ConvertOpportunity from "./ConvertOpportunity";
+import CallModel from "../CallModel";
+import WhatsappModel from "../WhatsappModel";
 
 const ViewOpportunity = () => {
   const { opportunityId } = useParams();
   const [opportunity, setOpportunity] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const date = new Date(opportunity?.dob).toDateString();
 
   useEffect(() => {
     const fetchOpportunity = async () => {
@@ -54,6 +57,11 @@ const ViewOpportunity = () => {
           <h2 className="text-title-xl font-extrabold mb-4 inline-block">
             Opportunities Details :
           </h2>
+          <div className="text-right mb-2 flex justify-end ">
+            <ConvertOpportunity opportunityId={opportunity._id} />
+            <CallModel callonNo={opportunity.number} />
+            <WhatsappModel whatsappNo={opportunity.number} />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-stroke px-5 py-2 dark:border-strokedark bg-white dark:bg-black">
             <div className="flex-1">
               <div className="">
@@ -74,7 +82,7 @@ const ViewOpportunity = () => {
                   <MdWork /> Occupation: {opportunity.occupation}
                 </p>
                 <p className="text-gray-600 mb-2 flex items-center gap-2">
-                  Status: {opportunity?.leadStatus}
+                  Status: {opportunity?.kyc.kycStatus}
                 </p>
               </div>
               <div className="bg-white dark:bg-black">
@@ -99,11 +107,7 @@ const ViewOpportunity = () => {
                   <MdWc /> Gender: {opportunity.gender}
                 </p>
                 <p className="text-gray-600 mb-2 flex items-center gap-2">
-                  <MdDateRange /> Date of Birth: {opportunity.dob}
-                </p>
-                <p className="text-gray-600 mb-2 flex items-center gap-2">
-                  <MdCheck /> Converted:{" "}
-                  {opportunity.kyc.isConverted ? "Yes" : "No"}
+                  <MdDateRange /> Date of Birth: {date}
                 </p>
               </div>
             </div>

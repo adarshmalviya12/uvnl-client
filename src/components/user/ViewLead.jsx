@@ -24,7 +24,7 @@ const ViewLead = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
-  const date = new Date(lead?.dob).toLocaleDateString();
+  const date = new Date(lead?.dob).toDateString();
 
   useEffect(() => {
     const token = localStorage.getItem("token");

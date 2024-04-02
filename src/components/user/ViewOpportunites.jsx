@@ -153,5 +153,4 @@ const ViewOpportunites = () => {
   );
 };
 
-
 export default ViewOpportunites;
