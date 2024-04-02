@@ -4,7 +4,7 @@ import BASE_URL from "../../constant";
 import formatDate from "../../utils/date";
 import CreateOpportunityFollowUp from "./CreateOpportunityFollowUp";
 
-const OpportunityLogs = ({ opportunity }) => {
+const OpportunityLogs = ({ opportunity, kycId }) => {
   const [followUps, setFollowUps] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const followUpsPerPage = 5; // Number of follow-ups to display per page

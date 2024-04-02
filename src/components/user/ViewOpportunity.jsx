@@ -59,7 +59,10 @@ const ViewOpportunity = () => {
             Opportunities Details :
           </h2>
           <div className="text-right mb-2 flex justify-end ">
-            <ConvertOpportunity opportunityId={opportunity._id} />
+            <ConvertOpportunity
+              opportunityId={opportunity._id}
+              kycId={opportunity.kyc._id}
+            />
             <CallModel callonNo={opportunity.number} />
             <WhatsappModel whatsappNo={opportunity.number} />
           </div>

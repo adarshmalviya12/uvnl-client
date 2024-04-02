@@ -2,13 +2,13 @@ import { useState } from "react";
 import BASE_URL from "../../constant";
 import axios from "axios";
 
-const ConvertOpportunity = ({ opportunityId }) => {
+const ConvertOpportunity = ({ opportunityId, kycId }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     adharCardNumber: "",
     panCardNumber: "",
-    kycId: opportunityId,
+    kycId: kycId,
   });
   const [fileInputs, setFileInputs] = useState({
     adharCardUrl: null,
@@ -29,23 +29,24 @@ const ConvertOpportunity = ({ opportunityId }) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
     try {
-      const token = localStorage.getItem("token");
       const formDataWithFiles = new FormData();
+      formDataWithFiles.append("kycId", formData.kycId);
       formDataWithFiles.append("adharCardNumber", formData.adharCardNumber);
       formDataWithFiles.append("panCardNumber", formData.panCardNumber);
       formDataWithFiles.append("adharCardUrl", fileInputs.adharCardUrl);
       formDataWithFiles.append("panCardUrl", fileInputs.panCardUrl);
-      formDataWithFiles.append("passportImage", fileInputs.passportImageUrl);
-      formDataWithFiles.append("signature", fileInputs.signatureUrl);
+      formDataWithFiles.append("passportImageUrl", fileInputs.passportImageUrl);
+      formDataWithFiles.append("signatureUrl", fileInputs.signatureUrl);
 
       await axios.post(`${BASE_URL}/user/kyc`, formDataWithFiles, {
         headers: {
-          Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       });
-      // Handle success notification or redirection
+
       alert("KYC submitted successfully!");
       setShowModal(false);
     } catch (error) {
@@ -72,7 +73,7 @@ const ConvertOpportunity = ({ opportunityId }) => {
                 </h3>
               </div>
               <div className="relative p-6 flex-auto overflow-y-auto max-h-96">
-                <form onSubmit={handleFormSubmit}>
+                <form onSubmit={handleFormSubmit} enctype="multipart/form-data">
                   <div className="mb-4">
                     <label
                       htmlFor="adharCardNumber"
@@ -112,6 +113,7 @@ const ConvertOpportunity = ({ opportunityId }) => {
                     </label>
                     <input
                       type="file"
+                      accept="image/*"
                       name="adharCardUrl"
                       onChange={handleFileInputChange}
                       className="w-full border border-stroke rounded py-1.5 px-3 outline-none focus:border-primary"
@@ -127,6 +129,7 @@ const ConvertOpportunity = ({ opportunityId }) => {
                     <input
                       type="file"
                       name="panCardUrl"
+                      accept="image/*"
                       onChange={handleFileInputChange}
                       className="w-full border border-stroke rounded py-1.5 px-3 outline-none focus:border-primary"
                     />
@@ -140,6 +143,7 @@ const ConvertOpportunity = ({ opportunityId }) => {
                     </label>
                     <input
                       type="file"
+                      accept="image/*"
                       name="passportImageUrl"
                       onChange={handleFileInputChange}
                       className="w-full border border-stroke rounded py-1.5 px-3 outline-none focus:border-primary"
@@ -154,6 +158,7 @@ const ConvertOpportunity = ({ opportunityId }) => {
                     </label>
                     <input
                       type="file"
+                      accept="image/*"
                       name="signatureUrl"
                       onChange={handleFileInputChange}
                       className="w-full border border-stroke rounded py-1.5 px-3 outline-none focus:border-primary"
