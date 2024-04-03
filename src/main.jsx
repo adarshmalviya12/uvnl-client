@@ -53,6 +53,9 @@ import OpportunityEditAdmin from "./components/admin/OpportunityEditAdmin.jsx";
 import Kyc from "./components/admin/kyc/Kyc.jsx";
 import UserDashboard from "./components/user/UserDashboard.jsx";
 import LeadPage from "./pages/LeadPage.jsx";
+import UserProfile from "./components/user/UserProfile.jsx";
+import UserFollowup from "./components/user/UserFollowup.jsx";
+import UserSettings from "./components/user/UserSettings.jsx";
 
 const router = createBrowserRouter([
   {
@@ -163,6 +166,18 @@ const router = createBrowserRouter([
       {
         path: "opportunity/edit/:opportunityId",
         element: <EditOpportunity />,
+      },
+      {
+        path: "userprofile",
+        element: <UserProfile />,
+      },
+      {
+        path: "userfollowup",
+        element: <UserFollowup />,
+      },
+      {
+        path: "usersettings",
+        element: <UserSettings />,
       },
     ],
   },
