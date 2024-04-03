@@ -50,11 +50,9 @@ const EditUserDetails = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      // Add success notification or redirect
       alert("User updated successfully!");
     } catch (error) {
       alert(error.response.data.message);
-      // Add error notification
     }
   };
 

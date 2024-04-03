@@ -39,7 +39,7 @@ const CategoryTable = () => {
       ) : (
         <>
           <div className="flex justify-between items-center text-title-lg mb-3   ">
-            <h1 className="text-black dark:text-white">Users</h1>
+            <h1 className="text-black dark:text-white"> Category</h1>
             <div className="max-h-132.5">
               <CreateCategory setCategories={setCategories} />
             </div>

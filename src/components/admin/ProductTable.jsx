@@ -40,7 +40,7 @@ const ProductTable = () => {
       ) : (
         <>
           <div className="flex justify-between items-center text-title-lg mb-3   ">
-            <h1 className="text-black dark:text-white">Users</h1>
+            <h1 className="text-black dark:text-white">Products</h1>
             <div className="max-h-132.5">
               <CreateProduct setProducts={setProducts} />
             </div>

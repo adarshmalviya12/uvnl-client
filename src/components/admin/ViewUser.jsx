@@ -2,12 +2,40 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BASE_URL from "../../constant";
+import { MdMail, MdPerson, MdPhone } from "react-icons/md";
 
 const ViewUser = () => {
   const { userId } = useParams();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [edit, setEdit] = useState(false);
+  const [formData, setFormData] = useState({});
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+      await axios.patch(`${BASE_URL}/admin/user/${userId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      alert("User updated successfully!");
+      setEdit(false);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -27,47 +55,146 @@ const ViewUser = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [user]);
 
   return (
-    <div className="max-w-md mx-auto bg-white dark:bg-black shadow-md overflow-hidden sm:rounded-lg">
-      <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">
-          User Information
-        </h3>
-      </div>
-      <div className="border-t border-gray-200">
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error: {error}</p>
-        ) : (
-          <>
-            <dl>
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Name</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                  {user.firstName} {user.middleName} {user.lastName}
-                </dd>
-              </div>
-
-              <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Email</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                  {user.email}
-                </dd>
-              </div>
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Number</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                  {user.number}
-                </dd>
-              </div>
-            </dl>
-          </>
-        )}
-      </div>
-    </div>
+    <>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : (
+        <>
+          <h1 className="text-title-lg mb-4">User Details </h1>
+          <div className=" border-b border-stroke font-normal text-sm md:text-base px-3 md:px-5 py-2 dark:border-strokedark bg-white dark:bg-black">
+            {!edit ? (
+              <>
+                <div>
+                  <p className="text-gray-600 mb-2 flex items-center gap-2">
+                    <MdPerson /> <span className="font-bold">Name :</span>
+                    {`${user.firstName} ${
+                      user.middleName ? user.middleName + " " : ""
+                    }${user.lastName}`}
+                  </p>
+                  <p className="text-gray-600 mb-2 flex items-center gap-2">
+                    <MdMail />
+                    <span className="font-bold">Email: </span> {user.email}
+                  </p>
+                  <p className="text-gray-600 mb-2 flex items-center gap-2">
+                    <MdPhone />
+                    <span className="font-bold">Number: </span> {user.number}
+                  </p>
+                </div>
+                <div className="mt-3 flex justify-end">
+                  <button
+                    className=" bg-primary text-white font-bold uppercase text-sm px-3 py-1 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setEdit(true)}
+                  >
+                    Edit
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <form className=" space-y-4 " onSubmit={handleSubmit}>
+                    {/* Username */}
+                    <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
+                      <div className="w-full xl:w-1/3">
+                        <label className=" md:mb-2.5 block text-black dark:text-white">
+                          First Name <span className="text-meta-1">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="firstName"
+                          placeholder="First Name"
+                          value={formData.firstName || user.firstName}
+                          onChange={handleInputChange}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
+                      <div className="w-full xl:w-1/3">
+                        <label className="md:mb-2.5 block text-black dark:text-white">
+                          Middle Name
+                        </label>
+                        <input
+                          type="text"
+                          name="middleName"
+                          placeholder="Middle Name"
+                          value={formData.middleName || user.middleName}
+                          onChange={handleInputChange}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
+                      <div className="w-full xl:w-1/3">
+                        <label className="md:mb-2.5 block text-black dark:text-white">
+                          Last Name <span className="text-meta-1">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="lastName"
+                          placeholder="Last Name"
+                          value={formData.lastName || user.lastName}
+                          onChange={handleInputChange}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
+                    </div>
+                    {/* Email */}
+                    <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
+                      <div className="w-full xl:w-1/3">
+                        <label className="md:mb-2.5 block text-black dark:text-white">
+                          Email <span className="text-meta-1">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="Email"
+                          value={formData.email || user.email}
+                          onChange={handleInputChange}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
+                      <div className="w-full xl:w-1/3">
+                        <label className="md:mb-2.5 block text-black dark:text-white">
+                          Phone <span className="text-meta-1">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          name="number"
+                          placeholder="number"
+                          value={formData.number || user.number}
+                          onChange={handleInputChange}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
+                      <div className="w-full xl:w-1/3"></div>
+                    </div>
+                    <div className="mt-3 flex justify-end">
+                      <button
+                        className=" bg-primary text-white font-bold uppercase text-sm px-3 py-1 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="submit"
+                      >
+                        Save
+                      </button>
+                      <button
+                        className=" bg-danger text-white font-bold uppercase text-sm px-3 py-1 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => setEdit(false)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </>
+            )}
+          </div>
+        </>
+      )}
+    </>
   );
 };
+
 export default ViewUser;

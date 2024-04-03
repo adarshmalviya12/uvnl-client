@@ -61,7 +61,7 @@ const OpportunityTable = () => {
       {" "}
       <>
         <div className="flex justify-between items-center text-title-lg mb-3">
-          <h1 className="text-black dark:text-white">Opportunities Table</h1>
+          <h1 className="text-black dark:text-white">Opportunities</h1>
         </div>
         <div>
           <div className="max-w-full overflow-x-auto">
