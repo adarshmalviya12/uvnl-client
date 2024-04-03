@@ -56,6 +56,10 @@ import LeadPage from "./pages/LeadPage.jsx";
 import UserProfile from "./components/user/UserProfile.jsx";
 import UserFollowup from "./components/user/UserFollowup.jsx";
 import UserSettings from "./components/user/UserSettings.jsx";
+import CategoryView from "./components/admin/CategoryView.jsx";
+import CategoryEdit from "./components/admin/CategoryEdit.jsx";
+import ProductView from "./components/admin/ProductView.jsx";
+import ProductEdit from "./components/admin/ProductEdit.jsx";
 
 const router = createBrowserRouter([
   {
@@ -84,8 +88,24 @@ const router = createBrowserRouter([
         element: <Category />,
       },
       {
+        path: "category/:categoryId",
+        element: <CategoryView />,
+      },
+      {
+        path: "category/edit/:categoryId",
+        element: <CategoryEdit />,
+      },
+      {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "product/:productId",
+        element: <ProductView />,
+      },
+      {
+        path: "product/edit/:productId",
+        element: <ProductEdit />,
       },
       {
         path: "opportunities",

@@ -37,7 +37,7 @@ const CreateProduct = ({ setProducts }) => {
       setShowModal(false);
     } catch (error) {
       console.error("Error creating Product:", error);
-      setErrorMessage(error.response?.data?.message || "An error occurred");
+      setErrorMessage(error.response.data?.message || "An error occurred");
     }
   };
 
@@ -53,7 +53,7 @@ const CreateProduct = ({ setProducts }) => {
         setCategories(response.data.data.categories);
         setLoading(false);
       } catch (error) {
-        setErrorMessage(error.response.data.message);
+        setErrorMessage(error?.response.data.message);
         setLoading(false);
       }
     };

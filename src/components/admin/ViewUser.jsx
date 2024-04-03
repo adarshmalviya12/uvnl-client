@@ -10,7 +10,13 @@ const ViewUser = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [edit, setEdit] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    email: "",
+    number: "",
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

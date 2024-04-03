@@ -5,7 +5,6 @@ import BASE_URL from "../../constant";
 
 const EditUserDetails = () => {
   const { userId } = useParams();
-  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({});
@@ -19,7 +18,7 @@ const EditUserDetails = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUser(response.data.data.user);
+
         setFormData({
           firstName: response.data.data.user.firstName || "",
           lastName: response.data.data.user.lastName || "",

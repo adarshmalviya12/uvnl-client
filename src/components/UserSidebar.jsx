@@ -69,7 +69,7 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <img src={"/src/logo/logofullwhite.png"} alt="Logo" />
         </NavLink>
 
-        {/* <button
+        <button
           ref={trigger}
           onClick={() => setSidebarOpen(!sidebarOpen)}
           aria-controls="sidebar"
@@ -89,7 +89,7 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               fill=""
             />
           </svg>
-        </button> */}
+        </button>
       </div>
       {/* <!-- SIDEBAR HEADER --> */}
 

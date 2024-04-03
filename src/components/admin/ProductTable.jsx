@@ -3,6 +3,9 @@ import Loader from "../Loader";
 import BASE_URL from "../../constant";
 import axios from "axios";
 import CreateProduct from "./CreateProduct";
+import { FaEdit, FaEye } from "react-icons/fa";
+import DeleteButton from "./DeleteButton";
+import { useNavigate } from "react-router-dom";
 
 const ProductTable = () => {
   const [products, setProducts] = useState([]);
@@ -10,6 +13,7 @@ const ProductTable = () => {
   const [error, setError] = useState(null);
 
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
     try {
@@ -24,6 +28,20 @@ const ProductTable = () => {
     } catch (error) {
       setError(error.response.data.message);
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${BASE_URL}/admin/category/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setCategories(categories.filter((item) => item._id !== id));
+    } catch (error) {
+      console.error("error", error?.response.data.message);
     }
   };
 
@@ -63,6 +81,9 @@ const ProductTable = () => {
                     <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
                       description
                     </th>
+                    <th className="min-w-[100px] py-4 px-4 font-bold text-center text-black dark:text-white">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -81,6 +102,27 @@ const ProductTable = () => {
                         </td>
                         <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
                           {item?.description}
+                        </td>
+                        <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                          <div className="flex gap-2 justify-center">
+                            <button
+                              onClick={() =>
+                                navigate(`/admin/product/${item._id}`)
+                              }
+                            >
+                              <FaEye />
+                            </button>
+                            <button
+                              onClick={() =>
+                                navigate(`/admin/product/edit/${item._id}`)
+                              }
+                            >
+                              <FaEdit />
+                            </button>
+                            <DeleteButton
+                              onDelete={() => handleDelete(item._id)}
+                            />
+                          </div>
                         </td>
                       </tr>
                     ))
