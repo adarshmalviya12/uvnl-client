@@ -2,7 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import BASE_URL from "../../constant";
 import { useParams } from "react-router-dom";
-import { MdMail, MdPerson, MdPhone } from "react-icons/md";
+import {
+  MdContentPaste,
+  MdDetails,
+  MdDriveFileRenameOutline,
+  MdMail,
+  MdPerson,
+  MdPhone,
+} from "react-icons/md";
 
 const CategoryView = () => {
   const { categoryId } = useParams();
@@ -45,16 +52,18 @@ const CategoryView = () => {
             <>
               <div>
                 <p className="text-gray-600 mb-2 flex items-center gap-2">
-                  <MdPerson /> <span className="font-bold">Name :</span>
+                  <MdDriveFileRenameOutline />{" "}
+                  <span className="font-bold">Name :</span>
                   {category.name}
                 </p>
                 <p className="text-gray-600 mb-2 flex items-center gap-2">
-                  <MdMail />
-                  <span className="font-bold">Email: </span> {category.details}
+                  <MdDetails />
+                  <span className="font-bold">Details: </span>{" "}
+                  {category.details}
                 </p>
                 <p className="text-gray-600 mb-2 flex items-center gap-2">
-                  <MdPhone />
-                  <span className="font-bold">Number: </span>{" "}
+                  <MdContentPaste />
+                  <span className="font-bold">Discription: </span>{" "}
                   {category.description}
                 </p>
               </div>
