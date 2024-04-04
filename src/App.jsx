@@ -1,31 +1,9 @@
-import axios from "axios";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import UserLogin from "./components/UserLogin";
 import { Link, useNavigate } from "react-router-dom";
-import BASE_URL from "./constant";
 import { MdOutlineMailOutline, MdPassword } from "react-icons/md";
 
 function App() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const navigate = useNavigate();
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(`${BASE_URL}/user/login`, {
-        email,
-        password,
-      });
-
-      localStorage.setItem("token", response.data.data.token);
-      navigate("/user/dashboard");
-    } catch (error) {
-      setErrorMessage(error.response.data.message);
-      console.log(error);
-    }
-  };
   return (
     <>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -73,6 +51,7 @@ function App() {
                   alt="Logo"
                 />
               </Link>
+              <UserLogin />
               <form onSubmit={handleFormSubmit}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
