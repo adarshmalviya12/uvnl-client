@@ -1,4 +1,80 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import BASE_URL from "../../constant";
+import { useParams } from "react-router-dom";
+import {
+  MdContentPaste,
+  MdDetails,
+  MdDriveFileRenameOutline,
+} from "react-icons/md";
+
 const ProductView = () => {
-  return <div>ProductView</div>;
+  const { productId } = useParams();
+  const [product, setProduct] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `${BASE_URL}/admin/product/${productId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setProduct(response.data.data.product);
+        setLoading(false);
+      } catch (error) {
+        setError(error.response.data.message);
+        setLoading(false);
+      }
+    };
+    fetchCategory();
+  }, []);
+  return (
+    <>
+      <>
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error: {error}</p>
+        ) : (
+          <>
+            <h1 className="text-title-lg mb-4">User Details </h1>
+            <div className=" border-b border-stroke font-normal text-sm md:text-base px-3 md:px-5 py-2 dark:border-strokedark bg-white dark:bg-black">
+              <>
+                <div>
+                  <p className="text-gray-600 mb-2 flex items-center gap-2">
+                    <MdDriveFileRenameOutline />{" "}
+                    <span className="font-bold">Name :</span>
+                    {product.name}
+                  </p>
+                  <p className="text-gray-600 mb-2 flex items-center gap-2">
+                    <MdDriveFileRenameOutline />{" "}
+                    <span className="font-bold">Category :</span>
+                    {product.category.name}
+                  </p>
+                  <p className="text-gray-600 mb-2 flex items-center gap-2">
+                    <MdDetails />
+                    <span className="font-bold">Details: </span>{" "}
+                    {product.details}
+                  </p>
+                  <p className="text-gray-600 mb-2 flex items-center gap-2">
+                    <MdContentPaste />
+                    <span className="font-bold">Discription: </span>{" "}
+                    {product.description}
+                  </p>
+                </div>
+              </>
+            </div>
+          </>
+        )}
+      </>
+    </>
+  );
 };
 export default ProductView;

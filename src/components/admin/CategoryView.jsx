@@ -6,9 +6,6 @@ import {
   MdContentPaste,
   MdDetails,
   MdDriveFileRenameOutline,
-  MdMail,
-  MdPerson,
-  MdPhone,
 } from "react-icons/md";
 
 const CategoryView = () => {

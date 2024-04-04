@@ -33,13 +33,13 @@ const ProductTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${BASE_URL}/admin/category/delete/${id}`, {
+      await axios.delete(`${BASE_URL}/admin/product/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      setCategories(categories.filter((item) => item._id !== id));
+      setProducts(products.filter((item) => item._id !== id));
     } catch (error) {
       console.error("error", error?.response.data.message);
     }

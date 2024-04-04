@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import BASE_URL from "../../constant";
-import { MdPerson } from "react-icons/md";
 
 const CategoryEdit = () => {
   const { categoryId } = useParams();
