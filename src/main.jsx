@@ -60,11 +60,16 @@ import CategoryView from "./components/admin/CategoryView.jsx";
 import CategoryEdit from "./components/admin/CategoryEdit.jsx";
 import ProductView from "./components/admin/ProductView.jsx";
 import ProductEdit from "./components/admin/ProductEdit.jsx";
+import ForgotPassword from "./components/ForgotPassword.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
   },
   {
     path: "/admin-login",
