@@ -70,14 +70,8 @@ const AdminLogin = () => {
                 </div>
               )}
 
-              <div className="mt-5 mb-5.5 flex items-center justify-between">
-                <a href="#" className="text-sm text-primary">
-                  Forget password?
-                </a>
-              </div>
-
               <button
-                className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
+                className="flex w-full justify-center rounded bg-primary p-3 mt-3 font-medium text-gray"
                 type="submit"
               >
                 Sign In

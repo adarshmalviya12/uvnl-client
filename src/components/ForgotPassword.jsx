@@ -82,7 +82,7 @@ const ForgotPassword = () => {
                     className=" iteme bg-primary p-1.5 font-medium text-gray"
                     type="submit"
                   >
-                    Send Otp
+                    Send OTP
                   </button>
                 </div>
               </div>

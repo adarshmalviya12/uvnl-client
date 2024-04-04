@@ -38,7 +38,7 @@ const CategoryTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${BASE_URL}/admin/category/delete/${id}`, {
+      await axios.delete(`${BASE_URL}/admin/category/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
