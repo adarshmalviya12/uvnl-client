@@ -1,4 +1,12 @@
+import LeadFollowUpByUser from "./LeadFollowUpByUser";
+import OpportunityFollowUpsByUser from "./OpportunityFollowUpsByUser";
+
 const UserFollowup = () => {
-  return <div>UserFollowup</div>;
+  return (
+    <div>
+      <LeadFollowUpByUser />
+      <OpportunityFollowUpsByUser />
+    </div>
+  );
 };
 export default UserFollowup;
