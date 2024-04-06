@@ -76,7 +76,7 @@ const ViewLead = () => {
             <h2 className="text-title-xl font-extrabold mb-4 inline-block">
               Leads Details :
             </h2>
-            <div className="text-right mb-2 flex justify-end ">
+            <div className=" mb-2 flex justify-end ">
               <Convert products={products} leadId={lead?._id} />
               <CallModel callonNo={lead.number} />
               <WhatsappModel whatsappNo={lead.number} />

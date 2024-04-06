@@ -61,6 +61,7 @@ import CategoryEdit from "./components/admin/CategoryEdit.jsx";
 import ProductView from "./components/admin/ProductView.jsx";
 import ProductEdit from "./components/admin/ProductEdit.jsx";
 import ForgotPassword from "./components/ForgotPassword.jsx";
+import UserKycs from "./components/user/UserKycs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -132,6 +133,7 @@ const router = createBrowserRouter([
         path: "profile",
         element: <AdminProfile />,
       },
+
       {
         path: "user/:userId",
         element: <ViewUser />,
@@ -191,6 +193,10 @@ const router = createBrowserRouter([
       {
         path: "opportunity/edit/:opportunityId",
         element: <EditOpportunity />,
+      },
+      {
+        path: "kycs",
+        element: <UserKycs />,
       },
       {
         path: "userprofile",

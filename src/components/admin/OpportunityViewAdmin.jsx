@@ -40,7 +40,7 @@ const OpportunityViewAdmin = () => {
         <p>Error: {error}</p>
       ) : (
         <div>
-          <h2 className="text-title-xl font-extrabold mb-4 inline-block">
+          <h2 className="text-title-lg font-extrabold mb-2 inline-block">
             Opportunities Details :
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-stroke px-5 py-2 dark:border-strokedark bg-white dark:bg-black">

@@ -55,16 +55,18 @@ const ViewOpportunity = () => {
         <p>Error: {error}</p>
       ) : (
         <div>
-          <h2 className="text-title-xl font-extrabold mb-4 inline-block">
-            Opportunities Details :
-          </h2>
-          <div className="text-right mb-2 flex justify-end ">
-            <ConvertOpportunity
-              opportunityId={opportunity._id}
-              kycId={opportunity.kyc._id}
-            />
-            <CallModel callonNo={opportunity.number} />
-            <WhatsappModel whatsappNo={opportunity.number} />
+          <div className="flex justify-between">
+            <h2 className="text-title-lg font-extrabold mb-2 inline-block">
+              Opportunities Details
+            </h2>
+            <div className="text-right mb-2 flex justify-end ">
+              <ConvertOpportunity
+                opportunityId={opportunity._id}
+                kycId={opportunity.kyc._id}
+              />
+              <CallModel callonNo={opportunity.number} />
+              <WhatsappModel whatsappNo={opportunity.number} />
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-stroke px-5 py-2 dark:border-strokedark bg-white dark:bg-black">
             <div className="flex-1">

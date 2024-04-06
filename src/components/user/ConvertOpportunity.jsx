@@ -40,12 +40,16 @@ const ConvertOpportunity = ({ opportunityId, kycId }) => {
       formDataWithFiles.append("passportImageUrl", fileInputs.passportImageUrl);
       formDataWithFiles.append("signatureUrl", fileInputs.signatureUrl);
 
-      await axios.post(`${BASE_URL}/user/kyc`, formDataWithFiles, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.post(
+        `${BASE_URL}/user/kyc/${opportunityId}`,
+        formDataWithFiles,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       alert("KYC submitted successfully!");
       setShowModal(false);

@@ -34,6 +34,15 @@ const CreateLeadModel = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const currentYear = new Date().getFullYear();
+    const dobYear = new Date(formData.dob).getFullYear();
+
+    // Check if the DOB is at least five years ago
+    if (currentYear - dobYear < 5) {
+      setErrorMessage("DOB should be at least five years ago");
+      return;
+    }
+
     try {
       const response = await axios.post(`${BASE_URL}/user/lead`, formData, {
         headers: {
@@ -44,8 +53,7 @@ const CreateLeadModel = () => {
       setShowModal(false);
     } catch (error) {
       console.error("Error creating lead:", error);
-      setErrorMessage(error.response?.data?.message || "An error occurred");
-      alert(errorMessage);
+      setErrorMessage(error.response?.data.message || "An error occurred");
     }
   };
 
@@ -72,6 +80,11 @@ const CreateLeadModel = () => {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto overflow-y-auto max-h-80 md:max-h-90 lg:max-h-115">
+                  {errorMessage && (
+                    <div className="text-danger text-sm mb-2">
+                      {errorMessage}
+                    </div>
+                  )}
                   <form action="" className="font-thin text-sm ">
                     {/* name  */}
                     <div className="mb-4.5 flex flex-col gap-6 md:flex-row">

@@ -8,7 +8,6 @@ const Convert = ({ products, leadId }) => {
   const [convertedLeadId, setConvertedLeadId] = useState(null); // New state to store leadId
 
   useEffect(() => {
-    // Set convertedLeadId when leadId prop changes
     setConvertedLeadId(leadId);
   }, [leadId]);
 
@@ -54,8 +53,8 @@ const Convert = ({ products, leadId }) => {
       </button>
       {showModal ? (
         <>
-          <div className="justify-center z-9999 items-center flex overflow-x-hidden overflow-y-auto md:max-h-171.5 fixed inset-0 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl form-container">
+          <div className="justify-center z-9999 items-center flex overflow-x-hidden overflow-y-auto  md:max-h-171.5 fixed inset-0  outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-black outline-none focus:outline-none">
                 {/*header*/}
@@ -67,18 +66,17 @@ const Convert = ({ products, leadId }) => {
                 {/*body*/}
                 <div className="relative p-6 flex-auto overflow-y-auto max-h-80 md:max-h-90 lg:max-h-115">
                   <form
-                    action=""
-                    className="font-thin text-sm"
+                    className="font-thin text-sm min-w-72.5 "
                     onSubmit={handleFormSubmit}
                   >
                     <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
-                      <div className="w-full ">
-                        <label className="mb-2.5 block text-black dark:text-white">
-                          Convert <span className="text-meta-1">*</span>
+                      <div className="w-full xl:w-1/3">
+                        <label className="mb-2.5 block font-medium text-black dark:text-white">
+                          Convert
                         </label>
                         <select
                           name="productId"
-                          value={formData.productId} // corrected the value to formData.product
+                          value={formData.productId}
                           onChange={handleInputChange}
                           className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-1.5 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         >

@@ -3,6 +3,7 @@ import axios from "axios";
 import BASE_URL from "../../constant";
 import formatDate from "../../utils/date";
 import { useAuth } from "../../context/AuthContext";
+import Loader from "../Loader";
 
 const LeadFollowUpByUser = () => {
   const { user } = useAuth();
@@ -49,12 +50,13 @@ const LeadFollowUpByUser = () => {
   }, [user]);
 
   if (loading) {
-    return <p>Loading...</p>; // Render loading indicator while fetching data
+    return <Loader />; // Render loading indicator while fetching data
   }
 
   if (error) {
     return <p>Error: {error.message}</p>; // Render error message if an error occurs
   }
+
   return (
     <>
       {/* <CreateLeadFollowUp setFollowUps={setFollowUps} user={user} /> */}
