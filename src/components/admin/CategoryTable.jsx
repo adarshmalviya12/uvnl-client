@@ -58,7 +58,7 @@ const CategoryTable = () => {
         <p>Error: {error}</p>
       ) : (
         <>
-          <div className="flex justify-between items-center text-title-lg mb-3">
+          <div className="flex justify-between items-center text-title-sm md:text-title-md mb-3   ">
             <h1 className="text-black dark:text-white">Category</h1>
             <div className="max-h-132.5">
               <CreateCategory setCategories={setCategories} />
@@ -66,19 +66,19 @@ const CategoryTable = () => {
           </div>
           <div>
             <div className="max-w-full overflow-x-auto">
-              <table className="bg-white w-full table-auto">
+              <table className=" bg-white text-sm md:text-base w-full table-auto">
                 <thead>
-                  <tr className="bg-bodydark text-left dark:bg-black">
-                    <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white xl:pl-11">
+                  <tr className="bg-bodydark text-center dark:bg-black">
+                    <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                       Name
                     </th>
-                    <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
+                    <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                       Details
                     </th>
-                    <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
+                    <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                       Description
                     </th>
-                    <th className="min-w-[100px] py-4 px-4 font-bold text-center text-black dark:text-white">
+                    <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                       Actions
                     </th>
                   </tr>
@@ -86,17 +86,20 @@ const CategoryTable = () => {
                 <tbody>
                   {categories.length !== 0 ? (
                     categories.map((category) => (
-                      <tr className="dark:bg-graydark" key={category._id}>
-                        <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                      <tr
+                        className="dark:bg-graydark text-center"
+                        key={category._id}
+                      >
+                        <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                           {category.name}
                         </td>
-                        <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                        <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                           {category.details}
                         </td>
-                        <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                        <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                           {category.description}
                         </td>
-                        <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                        <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                           <div className="flex gap-2 justify-center">
                             <button
                               onClick={() =>

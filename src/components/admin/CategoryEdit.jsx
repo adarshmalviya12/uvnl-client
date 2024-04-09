@@ -61,7 +61,8 @@ const CategoryEdit = () => {
       );
       alert("Category updated successfully!");
     } catch (error) {
-      alert(error.response.data.message);
+      setError(error.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -82,7 +83,7 @@ const CategoryEdit = () => {
           {category.name}
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="mb-4.5">
+          <div className="mb-2.5 flex flex-col gap-6 md:flex-row">
             <label className="mb-2.5 block text-black dark:text-white font-bold">
               Details:
               <input
@@ -90,11 +91,11 @@ const CategoryEdit = () => {
                 name="details"
                 value={formData.details}
                 onChange={handleInputChange}
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               />
             </label>
           </div>
-          <div className="mb-4.5">
+          <div className="mb-2.5">
             <label className="mb-2.5 block text-black dark:text-white font-bold">
               Description:
               <textarea
@@ -103,13 +104,13 @@ const CategoryEdit = () => {
                 value={formData.description}
                 onChange={handleInputChange}
                 rows="3"
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               ></textarea>
             </label>
           </div>
           <button
             type="submit"
-            className="bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-6 rounded-md transition duration-300"
+            className="bg-primary text-white font-bold uppercase text-sm px-3 py-1 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           >
             Submit
           </button>
