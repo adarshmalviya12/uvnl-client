@@ -18,6 +18,33 @@ const ViewUser = () => {
     number: "",
   });
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`${BASE_URL}/admin/user/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(response.data.data.user);
+        setFormData({
+          firstName: response.data.data.user.firstName,
+          middleName: response.data.data.user.middleName || "",
+          lastName: response.data.data.user.lastName,
+          email: response.data.data.user.email,
+          number: response.data.data.user.number || "",
+        });
+        setLoading(false);
+      } catch (error) {
+        setError(error.response.data.message);
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [userId]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -30,38 +57,23 @@ const ViewUser = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.patch(`${BASE_URL}/admin/user/${userId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.patch(
+        `${BASE_URL}/admin/user/${userId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
+      setUser(response.data.data);
       alert("User updated successfully!");
       setEdit(false);
     } catch (error) {
       alert(error.response.data.message);
     }
   };
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get(`${BASE_URL}/admin/user/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUser(response.data.data.user);
-        setLoading(false);
-      } catch (error) {
-        setError(error.response.data.message);
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, [user]);
 
   return (
     <>
@@ -71,8 +83,8 @@ const ViewUser = () => {
         <p>Error: {error}</p>
       ) : (
         <>
-          <h1 className="text-title-lg mb-4">User Details </h1>
-          <div className=" border-b border-stroke font-normal text-sm md:text-base px-3 md:px-5 py-2 dark:border-strokedark bg-white dark:bg-black">
+          <h1 className="text-title-lg mb-4">User Details</h1>
+          <div className="border-b border-stroke font-normal text-sm md:text-base px-3 md:px-5 py-2 dark:border-strokedark bg-white dark:bg-black">
             {!edit ? (
               <>
                 <div>
@@ -93,7 +105,7 @@ const ViewUser = () => {
                 </div>
                 <div className="mt-3 flex justify-end">
                   <button
-                    className=" bg-primary text-white font-bold uppercase text-sm px-3 py-1 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="bg-primary text-white font-bold uppercase text-sm px-3 py-1 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => setEdit(true)}
                   >
@@ -104,18 +116,18 @@ const ViewUser = () => {
             ) : (
               <>
                 <div>
-                  <form className=" space-y-4 " onSubmit={handleSubmit}>
+                  <form className="space-y-4" onSubmit={handleSubmit}>
                     {/* Username */}
                     <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
                       <div className="w-full xl:w-1/3">
-                        <label className=" md:mb-2.5 block text-black dark:text-white">
+                        <label className="md:mb-2.5 block text-black dark:text-white">
                           First Name <span className="text-meta-1">*</span>
                         </label>
                         <input
                           type="text"
                           name="firstName"
                           placeholder="First Name"
-                          value={formData.firstName || user.firstName}
+                          value={formData.firstName}
                           onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
@@ -128,7 +140,7 @@ const ViewUser = () => {
                           type="text"
                           name="middleName"
                           placeholder="Middle Name"
-                          value={formData.middleName || user.middleName}
+                          value={formData.middleName}
                           onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
@@ -141,7 +153,7 @@ const ViewUser = () => {
                           type="text"
                           name="lastName"
                           placeholder="Last Name"
-                          value={formData.lastName || user.lastName}
+                          value={formData.lastName}
                           onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
@@ -157,7 +169,7 @@ const ViewUser = () => {
                           type="email"
                           name="email"
                           placeholder="Email"
-                          value={formData.email || user.email}
+                          value={formData.email}
                           onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
@@ -170,7 +182,7 @@ const ViewUser = () => {
                           type="tel"
                           name="number"
                           placeholder="number"
-                          value={formData.number || user.number}
+                          value={formData.number}
                           onChange={handleInputChange}
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
@@ -179,13 +191,13 @@ const ViewUser = () => {
                     </div>
                     <div className="mt-3 flex justify-end">
                       <button
-                        className=" bg-primary text-white font-bold uppercase text-sm px-3 py-1 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        className="bg-primary text-white font-bold uppercase text-sm px-3 py-1 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="submit"
                       >
                         Save
                       </button>
                       <button
-                        className=" bg-danger text-white font-bold uppercase text-sm px-3 py-1 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        className="bg-danger text-white font-bold uppercase text-sm px-3 py-1 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         onClick={() => setEdit(false)}
                       >
