@@ -87,6 +87,7 @@ import { LeadProvider } from "./context/LeadContext.jsx";
 import { OpportunityProvider } from "./context/OpportunityContext.jsx";
 import { KycProvider } from "./context/KycContext.jsx";
 import KycView from "./components/user/KycView.jsx";
+import AdminViewKyc from "./components/admin/kyc/AdminViewKyc.jsx";
 
 const router = createBrowserRouter([
   {
@@ -178,7 +179,7 @@ const router = createBrowserRouter([
       },
       {
         path: "kyc/:kycId",
-        element: <OpportunityViewAdmin />,
+        element: <AdminViewKyc />,
       },
       {
         path: "opportunity",

@@ -60,7 +60,7 @@ const OpportunityTable = () => {
       </div>
       <div>
         <div className="max-w-full overflow-x-auto">
-          <table className=" bg-white text-sm md:text-base w-full table-auto">
+          <table className=" bg-white text-xs md:text-base w-full table-auto">
             <thead>
               <tr className="bg-bodydark text-center dark:bg-black">
                 <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
@@ -72,7 +72,7 @@ const OpportunityTable = () => {
                 <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Email
                 </th>
-                <th className="min-w-[100px] py-4 px-4 font-bold text-center text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Actions
                 </th>
               </tr>
@@ -80,17 +80,17 @@ const OpportunityTable = () => {
             <tbody>
               {opportunities.length !== 0 ? (
                 currentOpportunities?.map((item) => (
-                  <tr className="bg-white dark:bg-graydark" key={item._id}>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                  <tr className="dark:bg-graydark text-center" key={item?._id}>
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {item.firstName} {item.lastName}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {item.number}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {item.email}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       <div className="flex gap-2 justify-center">
                         <button
                           onClick={() =>
@@ -114,7 +114,7 @@ const OpportunityTable = () => {
               ) : (
                 <tr className="dark:bg-meta-4">
                   <td
-                    className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11"
+                    className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4"
                     colSpan="4"
                   >
                     No opportunities to display
