@@ -72,42 +72,46 @@ const ViewLead = () => {
         ) : error ? (
           <p>Error: {error}</p>
         ) : (
-          <div>
-            <h2 className="text-title-xl font-extrabold mb-4 inline-block">
-              Leads Details :
-            </h2>
-            <div className=" mb-2 flex justify-end ">
-              <Convert products={products} leadId={lead?._id} />
-              <CallModel callonNo={lead.number} />
-              <WhatsappModel whatsappNo={lead.number} />
+          <div className="">
+            <div className="flex justify-between">
+              {" "}
+              <h2 className="text-title-sm  md:text-title-lg mb-2">
+                Leads Details :
+              </h2>
+              <div className=" mb-2 text-xs flex justify-end ">
+                <Convert products={products} leadId={lead?._id} />
+                <CallModel callonNo={lead.number} />
+                <WhatsappModel whatsappNo={lead.number} />
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-stroke px-5 py-2 dark:border-strokedark bg-white dark:bg-black">
+
+            <div className="grid grid-cols-1 text-xs md:text-sm md:grid-cols-2 gap-4 border-b border-stroke px-5 py-2 dark:border-strokedark bg-white dark:bg-black">
               <div className="flex-1">
                 <div className="">
                   {/* Your existing code for the first column */}
                   <p className="text-gray-600 mb-2 flex items-center gap-2">
-                    <MdPerson />
+                    <MdPerson /> Name :{" "}
                     {`${lead.firstName} ${
                       lead.middleName ? lead.middleName + " " : ""
                     }${lead.lastName}`}
                   </p>
                   <p className="text-gray-600 mb-2 flex items-center gap-2">
-                    <MdPhone /> Mobile Number: {lead.number}
+                    <MdPhone /> Mobile Number : {lead.number}
                   </p>
                   <p className="text-gray-600 mb-2 flex items-center gap-2">
-                    <MdOutlineCardTravel /> Lead Source: {lead.leadSource}
+                    <MdOutlineCardTravel /> Lead Source : {lead.leadSource}
                   </p>
                   <p className="text-gray-600 mb-2 flex items-center gap-2">
-                    <MdWork /> Occupation: {lead.occupation}
+                    <MdWork /> Occupation : {lead.occupation}
                   </p>
                 </div>
                 <div className="bg-white dark:bg-black">
-                  {lead.address ? (
-                    <div>
-                      <MdLocationOn /> {lead?.address?.street}
-                      {lead?.address.city} ,{lead?.address.state},
-                      {lead?.address.pinCode}, {lead.address.country}
-                    </div>
+                  {lead?.address ? (
+                    <p className="text-gray-600 mb-2 flex items-center gap-2">
+                      <MdLocationOn /> Address : {lead?.address?.street}{" "}
+                      {lead?.address.city} {lead?.address.state}{" "}
+                      {lead?.address.pinCode} , {lead.address.country}
+                    </p>
                   ) : null}
                 </div>
               </div>

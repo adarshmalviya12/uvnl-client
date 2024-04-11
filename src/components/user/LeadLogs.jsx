@@ -53,22 +53,22 @@ const LeadLogs = ({ lead }) => {
       />
       <div className="mt-3">
         <div className="max-w-full overflow-x-auto">
-          <table className=" bg-white w-full table-auto">
+          <table className=" bg-white text-xs md:text-base w-full table-auto">
             <thead>
-              <tr className="bg-bodydark  text-left dark:bg-black">
-                <th className="min-w-[100px]  py-4 px-4 font-bold text-black dark:text-white xl:pl-11">
+              <tr className="bg-bodydark text-center dark:bg-black">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Type
                 </th>
-                <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Follow-up Date
                 </th>
-                <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Next Follow-up Date
                 </th>
-                <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Remarks
                 </th>
-                <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Call Status
                 </th>
               </tr>
@@ -76,20 +76,23 @@ const LeadLogs = ({ lead }) => {
             <tbody>
               {currentFollowUps?.length !== 0 ? (
                 currentFollowUps?.map((followUp) => (
-                  <tr className="  dark:bg-graydark" key={followUp._id}>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                  <tr
+                    className=" dark:bg-graydark text-center"
+                    key={followUp._id}
+                  >
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {followUp?.type}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {formatDate(followUp?.followUpDate)}{" "}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {formatDate(followUp?.nextFollowUpDate)}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {followUp.remarks}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {followUp?.callStatus}
                     </td>
                   </tr>

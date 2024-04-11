@@ -59,24 +59,24 @@ const ViewOpportunites = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center text-title-lg mb-3">
-        <h1 className="text-black dark:text-white">Opportunities Table</h1>
+      <div className="flex justify-between items-center text-title-sm md:text-title-md mb-3   ">
+        <h1 className="text-black dark:text-white">Opportunity</h1>
       </div>
       <div>
         <div className="max-w-full overflow-x-auto">
-          <table className="bg-white w-full table-auto">
+          <table className=" bg-white text-xs md:text-base w-full table-auto">
             <thead>
-              <tr className="bg-bodydark text-left dark:bg-meta-4">
-                <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white xl:pl-11">
+              <tr className="bg-bodydark text-center dark:bg-black">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Name
                 </th>
-                <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Mobile Number
                 </th>
-                <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Email
                 </th>
-                <th className="min-w-[100px] py-4 px-4 font-bold text-center text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Actions
                 </th>
               </tr>
@@ -84,17 +84,17 @@ const ViewOpportunites = () => {
             <tbody>
               {opportunities.length !== 0 ? (
                 currentOpportunities?.map((item) => (
-                  <tr className="dark:bg-meta-4" key={item._id}>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                  <tr className="dark:bg-graydark text-center" key={item?._id}>
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {item.firstName} {item.lastName}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {item.number}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {item.email}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       <div className="flex gap-2 justify-center">
                         <button
                           onClick={() =>

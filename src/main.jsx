@@ -1,14 +1,11 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-// import App from "./App.jsx";
-const App = React.lazy(() => import("./App.jsx"));
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Loader from "./components/Loader.jsx";
 
-// import components
-
-// Import components using default import
+// Import components using lazy loading
+const App = React.lazy(() => import("./App.jsx"));
 const AdminLogin = React.lazy(() => import("./pages/AdminLogin.jsx"));
 const AdminLayout = React.lazy(() => import("./layout/AdminLayout.jsx"));
 const AdminProfile = React.lazy(() =>
@@ -36,32 +33,60 @@ const EditOpportunity = React.lazy(() =>
   import("./components/user/EditOpportunity.jsx")
 );
 const ViewUser = React.lazy(() => import("./components/admin/ViewUser.jsx"));
+const EditUserDetails = React.lazy(() =>
+  import("./components/admin/EditUserDetails.jsx")
+);
+const Category = React.lazy(() => import("./components/admin/Category.jsx"));
+const Products = React.lazy(() => import("./components/admin/Products.jsx"));
+const AdminDashboard = React.lazy(() =>
+  import("./components/admin/AdminDashboard.jsx")
+);
+const Opportunity = React.lazy(() =>
+  import("./components/admin/Opportunity.jsx")
+);
+const OpportunityViewAdmin = React.lazy(() =>
+  import("./components/admin/OpportunityViewAdmin.jsx")
+);
+const OpportunityEditAdmin = React.lazy(() =>
+  import("./components/admin/OpportunityEditAdmin.jsx")
+);
+const Kyc = React.lazy(() => import("./components/admin/kyc/Kyc.jsx"));
+const UserDashboard = React.lazy(() =>
+  import("./components/user/UserDashboard.jsx")
+);
+const LeadPage = React.lazy(() => import("./pages/LeadPage.jsx"));
+const UserProfile = React.lazy(() =>
+  import("./components/user/UserProfile.jsx")
+);
+const UserFollowup = React.lazy(() =>
+  import("./components/user/UserFollowup.jsx")
+);
+const UserSettings = React.lazy(() =>
+  import("./components/user/UserSettings.jsx")
+);
+const CategoryView = React.lazy(() =>
+  import("./components/admin/CategoryView.jsx")
+);
+const CategoryEdit = React.lazy(() =>
+  import("./components/admin/CategoryEdit.jsx")
+);
+const ProductView = React.lazy(() =>
+  import("./components/admin/ProductView.jsx")
+);
+const ProductEdit = React.lazy(() =>
+  import("./components/admin/ProductEdit.jsx")
+);
+const ForgotPassword = React.lazy(() =>
+  import("./components/ForgotPassword.jsx")
+);
+const UserKycs = React.lazy(() => import("./components/user/UserKycs.jsx"));
 
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { UsersProvider } from "./context/UsersContext.jsx";
 import { LeadProvider } from "./context/LeadContext.jsx";
 import { OpportunityProvider } from "./context/OpportunityContext.jsx";
-import EditUserDetails from "./components/admin/EditUserDetails.jsx";
-import Category from "./components/admin/Category.jsx";
-import Products from "./components/admin/Products.jsx";
-import AdminDashboard from "./components/admin/AdminDashboard.jsx";
-import Opportunity from "./components/admin/Opportunity.jsx";
-import OpportunityViewAdmin from "./components/admin/OpportunityViewAdmin.jsx";
-import OpportunityEditAdmin from "./components/admin/OpportunityEditAdmin.jsx";
-
-// kyc
-import Kyc from "./components/admin/kyc/Kyc.jsx";
-import UserDashboard from "./components/user/UserDashboard.jsx";
-import LeadPage from "./pages/LeadPage.jsx";
-import UserProfile from "./components/user/UserProfile.jsx";
-import UserFollowup from "./components/user/UserFollowup.jsx";
-import UserSettings from "./components/user/UserSettings.jsx";
-import CategoryView from "./components/admin/CategoryView.jsx";
-import CategoryEdit from "./components/admin/CategoryEdit.jsx";
-import ProductView from "./components/admin/ProductView.jsx";
-import ProductEdit from "./components/admin/ProductEdit.jsx";
-import ForgotPassword from "./components/ForgotPassword.jsx";
-import UserKycs from "./components/user/UserKycs.jsx";
+import { KycProvider } from "./context/KycContext.jsx";
+import KycView from "./components/user/KycView.jsx";
 
 const router = createBrowserRouter([
   {
@@ -152,7 +177,7 @@ const router = createBrowserRouter([
         element: <Kyc />,
       },
       {
-        path: "opportunity/:opportunityId",
+        path: "kyc/:kycId",
         element: <OpportunityViewAdmin />,
       },
       {
@@ -195,8 +220,12 @@ const router = createBrowserRouter([
         element: <EditOpportunity />,
       },
       {
-        path: "kycs",
+        path: "kyc",
         element: <UserKycs />,
+      },
+      {
+        path: "kyc/:kycId",
+        element: <KycView />,
       },
       {
         path: "userprofile",
@@ -213,16 +242,17 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
       <UsersProvider>
         <LeadProvider>
           <OpportunityProvider>
-            <Suspense fallback={<Loader />}>
-              <RouterProvider router={router} />
-            </Suspense>
+            <KycProvider>
+              <Suspense fallback={<Loader />}>
+                <RouterProvider router={router} />
+              </Suspense>
+            </KycProvider>
           </OpportunityProvider>
         </LeadProvider>
       </UsersProvider>

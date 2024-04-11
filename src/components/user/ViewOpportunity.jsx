@@ -45,7 +45,7 @@ const ViewOpportunity = () => {
     };
 
     fetchOpportunity();
-  }, [opportunityId]);
+  }, []);
 
   return (
     <div className="p-10 text-black dark:text-white">
@@ -56,14 +56,11 @@ const ViewOpportunity = () => {
       ) : (
         <div>
           <div className="flex justify-between">
-            <h2 className="text-title-lg font-extrabold mb-2 inline-block">
+            <h2 className="text-title-sm  md:text-title-lg mb-2">
               Opportunities Details
             </h2>
             <div className="text-right mb-2 flex justify-end ">
-              <ConvertOpportunity
-                opportunityId={opportunity._id}
-                kycId={opportunity.kyc._id}
-              />
+              <ConvertOpportunity opportunityId={opportunity._id} />
               <CallModel callonNo={opportunity.number} />
               <WhatsappModel whatsappNo={opportunity.number} />
             </div>
@@ -88,17 +85,17 @@ const ViewOpportunity = () => {
                   <MdWork /> Occupation: {opportunity.occupation}
                 </p>
                 <p className="text-gray-600 mb-2 flex items-center gap-2">
-                  Status: {opportunity?.kyc.kycStatus}
+                  <MdWork /> Status: {opportunity?.kycStatus}
                 </p>
               </div>
               <div className="bg-white dark:bg-black">
                 {opportunity.address ? (
-                  <div>
-                    <MdLocationOn /> {opportunity?.address?.street}
-                    {opportunity?.address.city}, {opportunity?.address.state},
+                  <p className="text-gray-600 mb-2 flex items-center gap-2">
+                    <MdLocationOn /> {opportunity?.address?.street}{" "}
+                    {opportunity?.address.city}, {opportunity?.address.state}{" "}
                     {opportunity?.address.pinCode},{" "}
                     {opportunity.address.country}
-                  </div>
+                  </p>
                 ) : null}
               </div>
             </div>

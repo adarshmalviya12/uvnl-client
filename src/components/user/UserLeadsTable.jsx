@@ -36,26 +36,26 @@ const UserLeadsTable = ({ leads, setLeads }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center text-title-lg mb-3   ">
-        <h1 className="text-black dark:text-white">Leads Table</h1>
+      <div className="flex justify-between items-center text-title-sm md:text-title-md mb-3   ">
+        <h1 className="text-black dark:text-white">Leads</h1>
         <CreateLeadModel />
       </div>
       <div className="">
         <div className="max-w-full overflow-x-auto">
-          <table className=" bg-white w-full table-auto">
+          <table className=" bg-white text-xs md:text-base w-full table-auto">
             <thead>
-              <tr className="bg-bodydark  text-left dark:bg-black">
-                <th className="min-w-[100px]  py-4 px-4 font-bold text-black dark:text-white xl:pl-11">
+              <tr className="bg-bodydark text-center dark:bg-black">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Name
                 </th>
 
-                <th className="min-w-[100px] py-4 px-4 font-bold text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Mobile Number
                 </th>
-                <th className="min-w-[100px] py-4 px-4  font-bold text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Email
                 </th>
-                <th className=" min-w-[100px] py-4 px-4 font-bold text-center text-black dark:text-white">
+                <th className="min-w-[100px]  py-2 px-2 font-bold text-black dark:text-white xl:pl-11">
                   Actions
                 </th>
               </tr>
@@ -63,17 +63,17 @@ const UserLeadsTable = ({ leads, setLeads }) => {
             <tbody>
               {currentLeads.length !== 0 ? (
                 currentLeads?.map((lead) => (
-                  <tr className="  dark:bg-graydark" key={lead?._id}>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                  <tr className="dark:bg-graydark text-center" key={lead?._id}>
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {lead?.firstName} {lead?.lastName}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {lead?.number}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       {lead?.email}
                     </td>
-                    <td className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-2 px-2  dark:border-strokedark xl:pl-4">
                       <div className="flex gap-2 justify-center">
                         <button
                           onClick={() => navigate(`/user/lead/${lead?._id}`)}
@@ -95,12 +95,12 @@ const UserLeadsTable = ({ leads, setLeads }) => {
                   </tr>
                 ))
               ) : (
-                <tr className="dark:bg-meta-4">
+                <tr className="dark:bg-graydark text-center ">
                   <td
-                    className="border-b border-[#eee] py-3 px-2 pl-9 dark:border-strokedark xl:pl-11"
-                    colSpan="4"
+                    className="border-b border-[#eee] py-2 px-2  dark:border-strokedark  xl:pl-4"
+                    colSpan="5"
                   >
-                    No leads to display
+                    no lead to display
                   </td>
                 </tr>
               )}

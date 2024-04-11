@@ -24,7 +24,6 @@ const Convert = ({ products, leadId }) => {
       await axios.post(
         `${BASE_URL}/user/convert-lead/${convertedLeadId}`,
         {
-          leadStatus: "Converted",
           productId: formData.productId,
         },
         {
@@ -45,7 +44,7 @@ const Convert = ({ products, leadId }) => {
   return (
     <>
       <button
-        className="bg-meta-5  text-white active:bg-pink-600 font-bold uppercase text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className=" bg-primary  text-white text-xs active:bg-pink-600 font-bold uppercase px-1 py-0.5 md:px-3 md:py-1.5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -59,7 +58,7 @@ const Convert = ({ products, leadId }) => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-black outline-none focus:outline-none">
                 {/*header*/}
                 <div className="border-b border-stroke px-5 py-2 dark:border-strokedark">
-                  <h3 className="font-medium text-black dark:text-white">
+                  <h3 className="font-medium text-xs text-black dark:text-white">
                     Convert Lead
                   </h3>
                 </div>
@@ -70,9 +69,9 @@ const Convert = ({ products, leadId }) => {
                     onSubmit={handleFormSubmit}
                   >
                     <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
-                      <div className="w-full xl:w-1/3">
+                      <div className="w-full ">
                         <label className="mb-2.5 block font-medium text-black dark:text-white">
-                          Convert
+                          Convert to opportunity
                         </label>
                         <select
                           name="productId"
@@ -84,7 +83,11 @@ const Convert = ({ products, leadId }) => {
                             Select
                           </option>
                           {products.map((product, index) => (
-                            <option key={index} value={product._id}>
+                            <option
+                              key={index}
+                              value={product._id}
+                              className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary focus:text-black-2 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                            >
                               {product.name}
                             </option>
                           ))}

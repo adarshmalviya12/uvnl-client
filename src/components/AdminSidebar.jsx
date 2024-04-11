@@ -181,7 +181,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   }
                 >
                   <MdAddchart />
-                  Opportunity
+                  Opportunities
                 </NavLink>
               </li>
 

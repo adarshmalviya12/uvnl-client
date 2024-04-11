@@ -60,7 +60,7 @@ const CreateLeadModel = () => {
   return (
     <>
       <button
-        className=" bg-primary  text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className=" bg-primary  text-white active:bg-pink-600 font-bold uppercase text-sm px-3 py-1.5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -68,13 +68,13 @@ const CreateLeadModel = () => {
       </button>
       {showModal ? (
         <>
-          <div className="justify-center z-9999 items-center flex overflow-x-hidden overflow-y-auto  md:max-h-171.5 fixed inset-0  outline-none focus:outline-none">
+          <div className="justify-center z-9999 items-center flex overflow-x-hidden overflow-y-auto   fixed inset-0  outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-black outline-none focus:outline-none">
                 {/*header*/}
                 <div className="border-b border-stroke px-5 py-2 dark:border-strokedark">
-                  <h3 className="font-medium text-black dark:text-white">
+                  <h3 className="font-medium text-title-sm text-black dark:text-white">
                     Create Lead
                   </h3>
                 </div>
@@ -87,9 +87,9 @@ const CreateLeadModel = () => {
                   )}
                   <form action="" className="font-thin text-sm ">
                     {/* name  */}
-                    <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
+                    <div className="mb-4.5 flex flex-col gap-3 md:flex-row">
                       <div className="w-full xl:w-1/3">
-                        <label className="mb-2.5 block text-black dark:text-white">
+                        <label className="mb-1.5 block text-black dark:text-white">
                           First name <span className="text-meta-1">*</span>
                         </label>
                         <input
@@ -98,13 +98,13 @@ const CreateLeadModel = () => {
                           placeholder="first name"
                           value={formData.firstName}
                           onChange={handleInputChange}
-                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
 
                       <div className="w-full xl:w-1/2">
-                        <label className="mb-2.5 block text-black dark:text-white">
-                          Middlename <span className="text-meta-1">*</span>
+                        <label className="mb-1.5 block text-black dark:text-white">
+                          Middlename
                         </label>
                         <input
                           type="text"
@@ -112,12 +112,12 @@ const CreateLeadModel = () => {
                           placeholder="middlename"
                           value={formData.middleName}
                           onChange={handleInputChange}
-                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
 
                       <div className="w-full xl:w-1/3">
-                        <label className="mb-2.5 block text-black dark:text-white">
+                        <label className="mb-1.5 block text-black dark:text-white">
                           Last name <span className="text-meta-1">*</span>
                         </label>
                         <input
@@ -126,14 +126,14 @@ const CreateLeadModel = () => {
                           placeholder="last name"
                           value={formData.lastName}
                           onChange={handleInputChange}
-                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
                     </div>
                     {/* email and phone no  */}
                     <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
                       <div className="w-full xl:w-1/3">
-                        <label className="mb-2.5 block text-black dark:text-white">
+                        <label className="mb-1.5 block text-black dark:text-white">
                           Email <span className="text-meta-1">*</span>
                         </label>
                         <input
@@ -142,12 +142,12 @@ const CreateLeadModel = () => {
                           placeholder="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
 
                       <div className="w-full xl:w-1/3">
-                        <label className="mb-2.5 block text-black dark:text-white">
+                        <label className="mb-1.5 block text-black dark:text-white">
                           Phone No<span className="text-meta-1">*</span>
                         </label>
                         <input
@@ -156,12 +156,12 @@ const CreateLeadModel = () => {
                           placeholder="phone no"
                           value={formData.number}
                           onChange={handleInputChange}
-                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
 
                       <div className="w-full xl:w-1/3">
-                        <label className="mb-2.5 block text-black dark:text-white">
+                        <label className="mb-1.5 block text-black dark:text-white">
                           Gender <span className="text-meta-1">*</span>
                         </label>
                         <select
@@ -182,7 +182,7 @@ const CreateLeadModel = () => {
                     {/* gender dob and lead status */}
                     <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
                       <div className="w-full xl:w-1/3">
-                        <label className="mb-2.5 block text-black dark:text-white">
+                        <label className="mb-1.5 block text-black dark:text-white">
                           Occupation <span className="text-meta-1">*</span>
                         </label>
                         <input
@@ -191,12 +191,12 @@ const CreateLeadModel = () => {
                           placeholder="Occupation"
                           value={formData.occupation}
                           onChange={handleInputChange}
-                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
 
                       <div className="w-full xl:w-1/3">
-                        <label className="mb-2.5 block text-black dark:text-white">
+                        <label className="mb-1.5 block text-black dark:text-white">
                           Date of Birth <span className="text-meta-1">*</span>
                         </label>
                         <input
@@ -205,13 +205,13 @@ const CreateLeadModel = () => {
                           placeholder="date of birth"
                           value={formData.dob}
                           onChange={handleInputChange}
-                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
 
                       <div className="w-full xl:w-1/3">
-                        <label className="mb-2.5 block text-black dark:text-white">
-                          Lead Source <span className="text-meta-1">*</span>
+                        <label className="mb-1.5 block text-black dark:text-white">
+                          Lead Source
                         </label>
                         <select
                           name="leadSource"
@@ -235,8 +235,8 @@ const CreateLeadModel = () => {
                       </h1>
                       <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
                         <div className="w-full xl:w-1/3">
-                          <label className="mb-2.5 block text-black dark:text-white">
-                            Street <span className="text-meta-1">*</span>
+                          <label className="mb-1.5 block text-black dark:text-white">
+                            Street
                           </label>
                           <input
                             type="text"
@@ -244,13 +244,13 @@ const CreateLeadModel = () => {
                             placeholder="street"
                             value={formData.street}
                             onChange={handleInputChange}
-                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
 
                         <div className="w-full xl:w-1/3">
-                          <label className="mb-2.5 block text-black dark:text-white">
-                            City <span className="text-meta-1">*</span>
+                          <label className="mb-1.5 block text-black dark:text-white">
+                            City
                           </label>
                           <input
                             type="text"
@@ -258,12 +258,12 @@ const CreateLeadModel = () => {
                             placeholder="city"
                             value={formData.city}
                             onChange={handleInputChange}
-                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
                         <div className="w-full xl:w-1/3">
-                          <label className="mb-2.5 block text-black dark:text-white">
-                            State <span className="text-meta-1">*</span>
+                          <label className="mb-1.5 block text-black dark:text-white">
+                            State
                           </label>
                           <input
                             type="text"
@@ -271,14 +271,14 @@ const CreateLeadModel = () => {
                             placeholder="state"
                             value={formData.state}
                             onChange={handleInputChange}
-                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
                       </div>
                       <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
                         <div className="w-full xl:w-1/3">
-                          <label className="mb-2.5 block text-black dark:text-white">
-                            country <span className="text-meta-1">*</span>
+                          <label className="mb-1.5 block text-black dark:text-white">
+                            country
                           </label>
                           <input
                             type="text"
@@ -286,13 +286,13 @@ const CreateLeadModel = () => {
                             placeholder="Country"
                             value={formData.country}
                             onChange={handleInputChange}
-                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
 
                         <div className="w-full xl:w-1/3">
-                          <label className="mb-2.5 block text-black dark:text-white">
-                            Pincode <span className="text-meta-1">*</span>
+                          <label className="mb-1.5 block text-black dark:text-white">
+                            Pincode
                           </label>
                           <input
                             type="number"
@@ -300,7 +300,7 @@ const CreateLeadModel = () => {
                             placeholder="Pincode"
                             value={formData.pinCode}
                             onChange={handleInputChange}
-                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                            className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                           />
                         </div>
                       </div>

@@ -4,7 +4,7 @@ const WhatsappModel = ({ whatsappNo }) => {
   return (
     <>
       <button
-        className=" bg-primary  text-white active:bg-pink-600 font-bold uppercase text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className=" bg-primary  text-white text-xs active:bg-pink-600 font-bold uppercase px-1 py-0.5 md:px-3 md:py-1.5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
       >
         <a href={`https://wa.me/91${whatsappNo}`} target="_">

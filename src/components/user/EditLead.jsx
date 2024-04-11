@@ -96,7 +96,7 @@ const EditLead = () => {
           {/* Name */}
           <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
             <div className="w-full xl:w-1/2">
-              <label className="mb-2.5 block text-black dark:text-white">
+              <label className="mb-2.5 block text-black dark:text-white font-bold">
                 First Name <span className="text-meta-1">*</span>
               </label>
               <input
@@ -105,12 +105,12 @@ const EditLead = () => {
                 placeholder="First Name"
                 value={formData.firstName}
                 onChange={handleInputChange}
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               />
             </div>
             {/* Add similar inputs with corresponding name and value attributes */}
             <div className="w-full xl:w-1/2">
-              <label className="mb-2.5 block text-black dark:text-white">
+              <label className="mb-2.5 block text-black dark:text-white font-bold">
                 Last Name <span className="text-meta-1">*</span>
               </label>
               <input
@@ -119,14 +119,14 @@ const EditLead = () => {
                 placeholder="Last Name"
                 value={formData.lastName}
                 onChange={handleInputChange}
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               />
             </div>
           </div>
           {/* Email and Phone */}
           <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
             <div className="w-full xl:w-1/2">
-              <label className="mb-2.5 block text-black dark:text-white">
+              <label className="mb-2.5 block text-black dark:text-white font-bold">
                 Email <span className="text-meta-1">*</span>
               </label>
               <input
@@ -135,11 +135,11 @@ const EditLead = () => {
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               />
             </div>
             <div className="w-full xl:w-1/2">
-              <label className="mb-2.5 block text-black dark:text-white">
+              <label className="mb-2.5 block text-black dark:text-white font-bold">
                 Phone <span className="text-meta-1">*</span>
               </label>
               <input
@@ -148,21 +148,21 @@ const EditLead = () => {
                 placeholder="number"
                 value={formData.number}
                 onChange={handleInputChange}
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               />
             </div>
           </div>
           {/* Gender and Date of Birth */}
           <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
             <div className="w-full xl:w-1/2">
-              <label className="mb-2.5 block text-black dark:text-white">
+              <label className="mb-2.5 block text-black dark:text-white font-bold">
                 Gender <span className="text-meta-1">*</span>
               </label>
               <select
                 name="gender"
                 value={formData.gender}
                 onChange={handleInputChange}
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               >
                 <option value="">Select Gender</option>
                 <option value="male">Male</option>
@@ -171,7 +171,7 @@ const EditLead = () => {
               </select>
             </div>
             <div className="w-full xl:w-1/2">
-              <label className="mb-2.5 block text-black dark:text-white">
+              <label className="mb-2.5 block text-black dark:text-white font-bold">
                 Date of Birth <span className="text-meta-1">*</span>
               </label>
               <input
@@ -179,14 +179,14 @@ const EditLead = () => {
                 name="dob"
                 value={formData.dob}
                 onChange={handleInputChange}
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               />
             </div>
           </div>
           {/* Occupation */}
           <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
             <div className="w-full xl:w-1/2">
-              <label className="mb-2.5 block text-black dark:text-white">
+              <label className="mb-2.5 block text-black dark:text-white font-bold">
                 Occupation <span className="text-meta-1">*</span>
               </label>
               <input
@@ -195,18 +195,18 @@ const EditLead = () => {
                 placeholder="Occupation"
                 value={formData.occupation}
                 onChange={handleInputChange}
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               />
             </div>
             <div className="w-full xl:w-1/2">
-              <label className="mb-2.5 block text-black dark:text-white">
+              <label className="mb-2.5 block text-black dark:text-white font-bold">
                 Lead Status <span className="text-meta-1">*</span>
               </label>
               <select
                 name="leadStatus"
                 value={formData.leadStatus}
                 onChange={handleInputChange}
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               >
                 <option disabled>Select </option>
                 <option value="Not Contacted">Not Contacted</option>
@@ -223,7 +223,7 @@ const EditLead = () => {
             <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
               {/* Street */}
               <div className="w-full xl:w-1/3">
-                <label className="mb-2.5 block text-black dark:text-white">
+                <label className="mb-2.5 block text-black dark:text-white font-bold">
                   Street <span className="text-meta-1">*</span>
                 </label>
                 <input
@@ -232,12 +232,12 @@ const EditLead = () => {
                   placeholder="Street"
                   value={formData.street}
                   onChange={handleInputChange}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
               {/* City */}
               <div className="w-full xl:w-1/3">
-                <label className="mb-2.5 block text-black dark:text-white">
+                <label className="mb-2.5 block text-black dark:text-white font-bold">
                   City <span className="text-meta-1">*</span>
                 </label>
                 <input
@@ -246,12 +246,12 @@ const EditLead = () => {
                   placeholder="City"
                   value={formData.city}
                   onChange={handleInputChange}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
               {/* State */}
               <div className="w-full xl:w-1/3">
-                <label className="mb-2.5 block text-black dark:text-white">
+                <label className="mb-2.5 block text-black dark:text-white font-bold">
                   State <span className="text-meta-1">*</span>
                 </label>
                 <input
@@ -260,14 +260,14 @@ const EditLead = () => {
                   placeholder="State"
                   value={formData.state}
                   onChange={handleInputChange}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
             </div>
             <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
               {/* Country */}
               <div className="w-full xl:w-1/3">
-                <label className="mb-2.5 block text-black dark:text-white">
+                <label className="mb-2.5 block text-black dark:text-white font-bold">
                   Country <span className="text-meta-1">*</span>
                 </label>
                 <input
@@ -276,12 +276,12 @@ const EditLead = () => {
                   placeholder="Country"
                   value={formData.country}
                   onChange={handleInputChange}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
               {/* Pincode */}
               <div className="w-full xl:w-1/3">
-                <label className="mb-2.5 block text-black dark:text-white">
+                <label className="mb-2.5 block text-black dark:text-white font-bold">
                   Pincode <span className="text-meta-1">*</span>
                 </label>
                 <input
@@ -290,13 +290,12 @@ const EditLead = () => {
                   placeholder="Pincode"
                   value={formData.pinCode}
                   onChange={handleInputChange}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
             </div>
           </div>
 
-          {/* Address */}
           <button
             type="submit"
             className="bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-6 rounded-md transition duration-300"
