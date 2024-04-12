@@ -5,6 +5,7 @@ import AdminSidebar from "../components/AdminSidebar";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import BASE_URL from "../constant";
+import AdminHeader from "../components/admin/AdminHeader";
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -41,7 +42,10 @@ const AdminLayout = () => {
         {/* <!-- ===== Content Area Start ===== --> */}
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           {/* <!-- ===== Header Start ===== --> */}
-          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          <AdminHeader
+            sidebarOpen={sidebarOpen}
+            setSidebarOpen={setSidebarOpen}
+          />
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Start ===== --> */}
