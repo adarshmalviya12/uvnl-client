@@ -16,8 +16,10 @@ const ViewUser = () => {
     lastName: "",
     email: "",
     number: "",
+    dob: "",
   });
 
+  const date = user && user.dob ? new Date(user.dob).toDateString() : "N/A";
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -28,12 +30,18 @@ const ViewUser = () => {
           },
         });
         setUser(response.data.data.user);
+
+        const formattedDOB = response.data.data.user.dob
+          ? new Date(response.data.data.user.dob).toISOString().split("T")[0]
+          : "";
+
         setFormData({
           firstName: response.data.data.user.firstName,
           middleName: response.data.data.user.middleName || "",
           lastName: response.data.data.user.lastName,
           email: response.data.data.user.email,
           number: response.data.data.user.number || "",
+          dob: formattedDOB,
         });
         setLoading(false);
       } catch (error) {
@@ -101,6 +109,10 @@ const ViewUser = () => {
                   <p className="text-gray-600 mb-2 flex items-center gap-2">
                     <MdPhone />
                     <span className="font-bold">Number: </span> {user.number}
+                  </p>
+                  <p className="text-gray-600 mb-2 flex items-center gap-2">
+                    <MdPhone />
+                    <span className="font-bold">Date of Birth: </span> {date}
                   </p>
                 </div>
                 <div className="mt-3 flex justify-end">
@@ -187,7 +199,18 @@ const ViewUser = () => {
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
-                      <div className="w-full xl:w-1/3"></div>
+                      <div className="w-full xl:w-1/3">
+                        <label className="md:mb-2.5 block text-black dark:text-white">
+                          Date of Birth <span className="text-meta-1">*</span>
+                        </label>
+                        <input
+                          type="date"
+                          name="dob"
+                          value={formData.dob.split("T")[0]} // Assuming the dob is in ISO format
+                          onChange={handleInputChange}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-1.5 px-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
                     </div>
                     <div className="mt-3 flex justify-end">
                       <button

@@ -12,6 +12,7 @@ const CreateUser = () => {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [dob, setDob] = useState("");
   const [number, setNumber] = useState();
 
   const { setUsers } = useUsers();
@@ -19,6 +20,15 @@ const CreateUser = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    const currentYear = new Date().getFullYear();
+    const dobYear = new Date(dob).getFullYear();
+
+    // Check if the DOB is at least five years ago
+    if (currentYear - dobYear < 5) {
+      setErrorMessage("DOB should be at least five years ago");
+      return;
+    }
     try {
       const newUser = {
         email,
@@ -27,6 +37,7 @@ const CreateUser = () => {
         middleName,
         number,
         password,
+        dob,
       };
 
       const response = await axios.post(
@@ -45,6 +56,7 @@ const CreateUser = () => {
       setPassword("");
       setLastName("");
       setNumber("");
+      setDob("");
       setShowModal(false);
     } catch (error) {
       setErrorMessage(error?.response.data.message);
@@ -159,6 +171,23 @@ const CreateUser = () => {
                       </div>
                     </div>
                     {/* gender dob and lead status */}
+                    <div className="mb-4.5 flex flex-col gap-6 md:flex-row">
+                      <div className="w-full xl:w-1/3">
+                        <label className="mb-2.5 block text-black dark:text-white">
+                          Data of Birth <span className="text-meta-1">*</span>
+                        </label>
+                        <input
+                          type="date"
+                          name="dob"
+                          placeholder="Date of birth"
+                          onChange={(e) => setDob(e.target.value)}
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-0.5 px-1.5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        />
+                      </div>
+
+                      <div className="w-full xl:w-1/3"></div>
+                      <div className="w-full xl:w-1/3"></div>
+                    </div>
 
                     {/* Address */}
                     {/* error message  */}

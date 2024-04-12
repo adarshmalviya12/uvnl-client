@@ -36,7 +36,7 @@ const EditLead = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setLead(response.data.data.lead);
+
         setFormData({
           firstName: response.data.data.lead.firstName || "",
           middleName: response.data.data.lead.middleName || "",
